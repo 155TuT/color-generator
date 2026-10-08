@@ -1,0 +1,40 @@
+.distribution-view { min-width: 0; }
+.distribution-plots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.distribution-plot { min-width: 0; margin: 0; padding: 14px 10px 8px; border: 1px solid var(--line, #dedfd8); border-radius: 11px; background: #fbfcf8; }
+.distribution-plot-heading { display: flex; flex-direction: column; gap: 4px; padding: 0 5px 8px; }
+.distribution-plot-heading strong { color: var(--ink, #25342e); font-size: 12px; font-weight: 600; }
+.distribution-plot-heading span { color: var(--muted, #71786f); font-size: 10px; }
+.distribution-plot svg { display: block; width: 100%; height: auto; overflow: visible; }
+.distribution-ring { fill: none; stroke: #dfe4da; stroke-width: 1; }
+.distribution-axis { stroke: #d9dfd4; stroke-width: 1; }
+.distribution-gridline { stroke: #e8ece3; stroke-width: 1; }
+.distribution-gray-center { fill: #989d96; }
+.distribution-label, .distribution-scale-label { fill: #7b8576; font: 10px Inter, 'Microsoft YaHei', sans-serif; }
+.distribution-scale-label { fill: #8a9386; font-size: 9px; }
+.distribution-link { stroke: #8d9b85; stroke-width: 1.2; stroke-opacity: .64; pointer-events: none; }
+.distribution-link.is-active { stroke: #344e3d; stroke-width: 2; stroke-opacity: 1; }
+.distribution-link.is-muted { stroke-opacity: .16; }
+.distribution-point { cursor: pointer; stroke: #fff; stroke-width: 1.7; paint-order: stroke fill; transition: opacity .12s; outline: none; }
+.distribution-point.is-neighbor { stroke: #697762; stroke-width: 2.5; }
+.distribution-point.is-selected { stroke: #516b45; stroke-width: 3.5; stroke-dasharray: 2.5 1.5; }
+.distribution-point.is-active, .distribution-point:focus-visible { stroke: #223c2c; stroke-width: 4; }
+.distribution-point.is-active { stroke-dasharray: none; }
+.distribution-point.is-muted { opacity: .4; }
+.distribution-detail { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 12px; min-height: 70px; padding: 12px; background: #f4f7ef; border: 1px solid #e4e9de; border-radius: 9px; }
+.distribution-detail-swatch { flex: 0 0 31px; width: 31px; height: 31px; border-radius: 7px; border: 1px solid #d0d8c9; background: #e8ede2; }
+.distribution-detail-body { display: flex; flex: 1; flex-direction: column; gap: 4px; min-width: 0; }
+.distribution-detail-title { font-size: 11px; font-weight: 600; color: #52664c; }
+.distribution-detail.has-color .distribution-detail-title { font-family: Consolas, monospace; letter-spacing: .035em; }
+.distribution-detail-hint { color: #738069; font-size: 10px; line-height: 1.6; }
+.distribution-detail .distribution-detail-metrics { flex: 0 0 100%; grid-template-columns: repeat(5, minmax(0, 1fr)); margin-top: 0; border-bottom: 0; padding: 12px 0 0; }
+.distribution-detail-metrics > div { min-width: 0; padding-left: 12px; }
+.distribution-detail-metrics[hidden], .distribution-detail-hint[hidden] { display: none; }
+.distribution-caption, .distribution-empty { margin: 10px 0 0; font-size: 10px; color: var(--muted, #71786f); line-height: 1.7; }
+@media (max-width: 650px) {
+  .distribution-plots { grid-template-columns: 1fr; gap: 12px; }
+  .distribution-plot { padding: 13px 12px 6px; }
+  .distribution-plot svg { max-width: 360px; margin: 0 auto; }
+  .distribution-detail .distribution-detail-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 14px; }
+  .distribution-detail-metrics > div:nth-child(4) { padding-left: 0; border-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .distribution-point { transition: none; } }

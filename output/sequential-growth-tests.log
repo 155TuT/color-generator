@@ -1,0 +1,337 @@
+
+> course-color-generator@1.0.0 test
+> node scripts/test.mjs
+
+TAP version 13
+# Subtest: the default hard band rejects gray, black and white independently of text or the search domain
+ok 1 - the default hard band rejects gray, black and white independently of text or the search domain
+  ---
+  duration_ms: 3.941
+  type: 'test'
+  ...
+# Subtest: omitting the lower bound preserves the historical API meaning of zero
+ok 2 - omitting the lower bound preserves the historical API meaning of zero
+  ---
+  duration_ms: 0.3367
+  type: 'test'
+  ...
+# Subtest: the hard lower and upper limits compare actual HEX chroma inclusively and without display rounding
+ok 3 - the hard lower and upper limits compare actual HEX chroma inclusively and without display rounding
+  ---
+  duration_ms: 0.304
+  type: 'test'
+  ...
+# Subtest: invalid and inverted hard chroma bands fail before root sampling without changing the project
+ok 4 - invalid and inverted hard chroma bands fail before root sampling without changing the project
+  ---
+  duration_ms: 1.4431
+  type: 'test'
+  ...
+# Subtest: random roots obey narrow chroma bands after eight-bit quantization across seeds
+ok 5 - random roots obey narrow chroma bands after eight-bit quantization across seeds
+  ---
+  duration_ms: 2.9546
+  type: 'test'
+  ...
+# Subtest: add, completion, partial redraw and full reset all honor the hard band
+ok 6 - add, completion, partial redraw and full reset all honor the hard band
+  ---
+  duration_ms: 784.3408
+  type: 'test'
+  ...
+# Subtest: a gray manually supplied root and a disjoint manual domain stop subsequent growth atomically
+ok 7 - a gray manually supplied root and a disjoint manual domain stop subsequent growth atomically
+  ---
+  duration_ms: 0.5511
+  type: 'test'
+  ...
+# Subtest: the empty automatic search display reflects both hard chroma bounds
+ok 8 - the empty automatic search display reflects both hard chroma bounds
+  ---
+  duration_ms: 0.1486
+  type: 'test'
+  ...
+# Subtest: a single \#66A08F primary can generate a complete palette in the exploration domain
+ok 9 - a single \#66A08F primary can generate a complete palette in the exploration domain
+  ---
+  duration_ms: 671.1656
+  type: 'test'
+  ...
+# Subtest: a single \#A2CAE7 primary can generate a complete palette in the exploration domain
+ok 10 - a single \#A2CAE7 primary can generate a complete palette in the exploration domain
+  ---
+  duration_ms: 232.0816
+  type: 'test'
+  ...
+# Subtest: a narrow neutral \#000000 domain reports an incomplete search instead of silently widening the range
+ok 11 - a narrow neutral \#000000 domain reports an incomplete search instead of silently widening the range
+  ---
+  duration_ms: 12.9017
+  type: 'test'
+  ...
+# Subtest: generation is deterministic, preserves every primary, and does not mutate the inputs
+ok 12 - generation is deterministic, preserves every primary, and does not mutate the inputs
+  ---
+  duration_ms: 1420.5832
+  type: 'test'
+  ...
+# Subtest: the immutable example remains an independent feasibility witness
+ok 13 - the immutable example remains an independent feasibility witness
+  ---
+  duration_ms: 569.5586
+  type: 'test'
+  ...
+# Subtest: partial regeneration changes only selected positions and excludes the previous colors
+ok 14 - partial regeneration changes only selected positions and excludes the previous colors
+  ---
+  duration_ms: 748.6776
+  type: 'test'
+  ...
+# Subtest: a failed partial regeneration retains all original colors and positions
+ok 15 - a failed partial regeneration retains all original colors and positions
+  ---
+  duration_ms: 619.2832
+  type: 'test'
+  ...
+# Subtest: an exhausted search cannot partially overwrite selected colors
+ok 16 - an exhausted search cannot partially overwrite selected colors
+  ---
+  duration_ms: 593.1134
+  type: 'test'
+  ...
+# Subtest: neutral grays ignore hue restrictions while chromatic colors respect them
+ok 17 - neutral grays ignore hue restrictions while chromatic colors respect them
+  ---
+  duration_ms: 0.5176
+  type: 'test'
+  ...
+# Subtest: candidate checks allow local repairs despite unrelated fixed-color conflicts
+ok 18 - candidate checks allow local repairs despite unrelated fixed-color conflicts
+  ---
+  duration_ms: 0.9893
+  type: 'test'
+  ...
+# Subtest: sorting preserves every color, all aggregate constraints, and its input array
+ok 19 - sorting preserves every color, all aggregate constraints, and its input array
+  ---
+  duration_ms: 582.2838
+  type: 'test'
+  ...
+# Subtest: out-of-sRGB points are rejected instead of clipped and ordinary HEX round-trips exactly
+ok 20 - out-of-sRGB points are rejected instead of clipped and ordinary HEX round-trips exactly
+  ---
+  duration_ms: 0.2408
+  type: 'test'
+  ...
+# Subtest: invalid primary constraints fail without overwriting supplied colors
+ok 21 - invalid primary constraints fail without overwriting supplied colors
+  ---
+  duration_ms: 0.4498
+  type: 'test'
+  ...
+# Subtest: new sessions start with a single unnamed empty palette
+ok 22 - new sessions start with a single unnamed empty palette
+  ---
+  duration_ms: 2.5212
+  type: 'test'
+  ...
+# Subtest: sessions and both immutable examples own their nested state
+ok 23 - sessions and both immutable examples own their nested state
+  ---
+  duration_ms: 0.4854
+  type: 'test'
+  ...
+# Subtest: automatic domain covers supplied colors while manual domain stays fixed and detached
+ok 24 - automatic domain covers supplied colors while manual domain stays fixed and detached
+  ---
+  duration_ms: 1.8096
+  type: 'test'
+  ...
+# Subtest: worker and export snapshots preserve effective domain and remain independent
+ok 25 - worker and export snapshots preserve effective domain and remain independent
+  ---
+  duration_ms: 3.6753
+  type: 'test'
+  ...
+# Subtest: completing forest after deletion preserves every retained HEX and does not mutate the project
+ok 26 - completing forest after deletion preserves every retained HEX and does not mutate the project
+  ---
+  duration_ms: 204.3655
+  type: 'test'
+  ...
+# Subtest: completing clay after deletion preserves every retained HEX and does not mutate the project
+ok 27 - completing clay after deletion preserves every retained HEX and does not mutate the project
+  ---
+  duration_ms: 194.4991
+  type: 'test'
+  ...
+# Subtest: invalid fixed colors and exhausted manual ranges do not silently replace colors
+ok 28 - invalid fixed colors and exhausted manual ranges do not silently replace colors
+  ---
+  duration_ms: 9.9872
+  type: 'test'
+  ...
+# Subtest: single-root neighborhoods have radial depth instead of a constant-chroma ring or a shifted ring
+ok 29 - single-root neighborhoods have radial depth instead of a constant-chroma ring or a shifted ring
+  ---
+  duration_ms: 7023.2537
+  type: 'test'
+  ...
+# [{"root":"\#7A5607","seed":"radial-01","std":0.008454965000820958,"spread":0.02278189233069247,"radialWidth":0.038277495185575036,"medianShift":-0.003832510927298527},{"root":"\#7A5607","seed":"radial-02","std":0.008645163418986666,"spread":0.0234194260534622,"radialWidth":0.038277495185575036,"medianShift":-0.003078582812470393},{"root":"\#7A5607","seed":"radial-03","std":0.008300631392985054,"spread":0.022863964959312227,"radialWidth":0.038277495185575036,"medianShift":-0.006640148039005242},{"root":"\#7A6068","seed":"radial-01","std":0.005098708351712598,"spread":0.013625288040948563,"radialWidth":0.030575043074911414,"medianShift":0.0062879991172474295},{"root":"\#7A6068","seed":"radial-02","std":0.006137115177772227,"spread":0.014360359184488851,"radialWidth":0.030575043074911414,"medianShift":0.01043851291929282},{"root":"\#7A6068","seed":"radial-03","std":0.006323365628124106,"spread":0.016330394197952625,"radialWidth":0.030575043074911414,"medianShift":0.00667410395794172},{"root":"\#66A08F","seed":"radial-01","std":0.007956594074901138,"spread":0.02076022422161332,"radialWidth":0.05000000000000001,"medianShift":0.004986288941368891},{"root":"\#66A08F","seed":"radial-02","std":0.007560471397234869,"spread":0.019632355593580487,"radialWidth":0.05000000000000001,"medianShift":0.0038757449391548376},{"root":"\#66A08F","seed":"radial-03","std":0.0070435115327430785,"spread":0.01797191094120388,"radialWidth":0.05000000000000001,"medianShift":0},{"root":"\#9090AB","seed":"radial-01","std":0.005886972110362768,"spread":0.013672869292529859,"radialWidth":0.034772195344113355,"medianShift":0.003943491886940979},{"root":"\#9090AB","seed":"radial-02","std":0.0061717767846241585,"spread":0.016026664751446464,"radialWidth":0.034772195344113355,"medianShift":0.004748426123921838},{"root":"\#9090AB","seed":"radial-03","std":0.005708486002333689,"spread":0.015281565420248236,"radialWidth":0.034772195344113355,"medianShift":0.006241360650090885},{"root":"\#F39E9D","seed":"radial-01","std":0.0065984347260133625,"spread":0.01848604035330216,"radialWidth":0.0330162051125104,"medianShift":-0.004794799044526343},{"root":"\#F39E9D","seed":"radial-02","std":0.006884628692306122,"spread":0.01813129869130449,"radialWidth":0.0330162051125104,"medianShift":-0.0030121074002190246},{"root":"\#F39E9D","seed":"radial-03","std":0.006878743500885081,"spread":0.0175222578961709,"radialWidth":0.0330162051125104,"medianShift":0}]
+# Subtest: single-root radial exploration has the same prefix when added one step at a time
+ok 30 - single-root radial exploration has the same prefix when added one step at a time
+  ---
+  duration_ms: 878.6506
+  type: 'test'
+  ...
+# Subtest: radial exploration remains a soft preference inside an explicitly narrow chroma range
+ok 31 - radial exploration remains a soft preference inside an explicitly narrow chroma range
+  ---
+  duration_ms: 474.8397
+  type: 'test'
+  ...
+# Subtest: a first root is deterministic under only sRGB and the hard chroma band
+ok 32 - a first root is deterministic under only sRGB and the hard chroma band
+  ---
+  duration_ms: 6.7585
+  type: 'test'
+  ...
+# Subtest: one add and a complete run share every prefix, and repeat exactly without input mutation
+ok 33 - one add and a complete run share every prefix, and repeat exactly without input mutation
+  ---
+  duration_ms: 1506.2592
+  type: 'test'
+  ...
+# Subtest: display sorting cannot change the next growth color or the saved birth history
+ok 34 - display sorting cannot change the next growth color or the saved birth history
+  ---
+  duration_ms: 74.6424
+  type: 'test'
+  ...
+# Subtest: partial randomization changes selected slots only inside the frozen current range
+ok 35 - partial randomization changes selected slots only inside the frozen current range
+  ---
+  duration_ms: 149.9061
+  type: 'test'
+  ...
+# Subtest: randomizing the only selected color starts a new root rather than its old neighborhood
+ok 36 - randomizing the only selected color starts a new root rather than its old neighborhood
+  ---
+  duration_ms: 0.8319
+  type: 'test'
+  ...
+# Subtest: full randomization discards the old manual envelope and regrows sequentially with global rules
+ok 37 - full randomization discards the old manual envelope and regrows sequentially with global rules
+  ---
+  duration_ms: 82.6151
+  type: 'test'
+  ...
+# Subtest: deletion and manual edits reconcile birth history without orphan parents or ghost references
+ok 38 - deletion and manual edits reconcile birth history without orphan parents or ghost references
+  ---
+  duration_ms: 42.0236
+  type: 'test'
+  ...
+# Subtest: a failed completion never applies a partial tree or changes fixed colors
+ok 39 - a failed completion never applies a partial tree or changes fixed colors
+  ---
+  duration_ms: 5.9407
+  type: 'test'
+  ...
+# Subtest: a long gap asks for a transition color instead of extending the gap
+ok 40 - a long gap asks for a transition color instead of extending the gap
+  ---
+  duration_ms: 17.9881
+  type: 'test'
+  ...
+# Subtest: close colors explore beyond their tiny hue interval while keeping a nearby attachment
+ok 41 - close colors explore beyond their tiny hue interval while keeping a nearby attachment
+  ---
+  duration_ms: 15.4904
+  type: 'test'
+  ...
+# Subtest: one supplied root grows multiple nearby hue directions without becoming a neutral ramp
+ok 42 - one supplied root grows multiple nearby hue directions without becoming a neutral ramp
+  ---
+  duration_ms: 416.0125
+  type: 'test'
+  ...
+# Subtest: a single hue with floating-point wraparound stays inside its own nearby search arc
+ok 43 - a single hue with floating-point wraparound stays inside its own nearby search arc
+  ---
+  duration_ms: 13.3091
+  type: 'test'
+  ...
+# Subtest: forest representatives retain nearby color families and example-scale connectivity
+ok 44 - forest representatives retain nearby color families and example-scale connectivity
+  ---
+  duration_ms: 1525.6303
+  type: 'test'
+  ...
+# [{"preset":"forest","seed":"growth-study-01","nearest":3.314900835592436,"mstMax":4.899678138091594,"pairMedian":10.609060549979331,"chromaMedian":0.07458464032849872,"hueArc":{"start":144.91134095458915,"end":239.91314326743702,"span":95.00180231284787}},{"preset":"forest","seed":"growth-study-02","nearest":3.41946639817281,"mstMax":4.815502140226353,"pairMedian":10.833935968387372,"chromaMedian":0.07459867788980375,"hueArc":{"start":144.91134095458915,"end":241.36113864383276,"span":96.44979768924361}},{"preset":"forest","seed":"growth-study-03","nearest":3.3452775379677253,"mstMax":5.093642794688382,"pairMedian":10.639140940573794,"chromaMedian":0.0745424167699334,"hueArc":{"start":144.91134095458915,"end":239.91314326743702,"span":95.00180231284787}}]
+# Subtest: clay representatives retain nearby color families and example-scale connectivity
+ok 45 - clay representatives retain nearby color families and example-scale connectivity
+  ---
+  duration_ms: 1768.0887
+  type: 'test'
+  ...
+# [{"preset":"clay","seed":"growth-study-01","nearest":4.001052242925351,"mstMax":4.592392787159637,"pairMedian":10.96449111377278,"chromaMedian":0.07322334080938527,"hueArc":{"start":269.6608489507456,"end":52.51725170176218,"span":142.85640275101656}},{"preset":"clay","seed":"growth-study-02","nearest":4.1026525768772,"mstMax":5.162698932693209,"pairMedian":12.036615975628091,"chromaMedian":0.07208010991262204,"hueArc":{"start":269.6608489507456,"end":52.51725170176218,"span":142.85640275101656}},{"preset":"clay","seed":"growth-study-03","nearest":4.106300551387952,"mstMax":5.197094574278679,"pairMedian":11.511212433663868,"chromaMedian":0.06920003529175417,"hueArc":{"start":269.6608489507456,"end":52.51725170176218,"span":142.85640275101656}}]
+# Subtest: the original Halton candidate pool and three attempts are retained for the historical forest input
+ok 46 - the original Halton candidate pool and three attempts are retained for the historical forest input
+  ---
+  duration_ms: 816.5643
+  type: 'test'
+  ...
+# Subtest: short-hue bridges preserve interpolated chroma and cross zero without taking the long arc
+ok 47 - short-hue bridges preserve interpolated chroma and cross zero without taking the long arc
+  ---
+  duration_ms: 0.3363
+  type: 'test'
+  ...
+# Subtest: forest generation keeps neighboring families and modest connecting steps across seeds
+ok 48 - forest generation keeps neighboring families and modest connecting steps across seeds
+  ---
+  duration_ms: 1796.9469
+  type: 'test'
+  ...
+# {"style":"forest","measurements":[{"seed":"style-01","nearestMedian":3.1763854708890356,"nearestMax":4.3018036054204325,"treeMedian":3.318470238968568,"treeMax":4.3018036054204325,"minChroma":0.0590113427596756},{"seed":"style-02","nearestMedian":3.301162327049319,"nearestMax":4.035408241449145,"treeMedian":3.5130107132428914,"treeMax":4.327918791863534,"minChroma":0.0590113427596756},{"seed":"style-03","nearestMedian":3.338501401949868,"nearestMax":3.8043633999686044,"treeMedian":3.4570057185726295,"treeMax":4.230577114623705,"minChroma":0.0590113427596756}]}
+# Subtest: clay generation keeps neighboring families and modest connecting steps across seeds
+ok 49 - clay generation keeps neighboring families and modest connecting steps across seeds
+  ---
+  duration_ms: 2548.2058
+  type: 'test'
+  ...
+# {"style":"clay","measurements":[{"seed":"style-01","nearestMedian":3.5254331599497686,"nearestMax":4.011500186099061,"treeMedian":3.6408740583869927,"treeMax":4.183576797726333,"minChroma":0.043493002799658655},{"seed":"style-02","nearestMedian":3.2393322425740454,"nearestMax":3.8180316254471927,"treeMedian":3.587809613959659,"treeMax":4.604806850364578,"minChroma":0.043493002799658655},{"seed":"style-03","nearestMedian":3.2891113699333294,"nearestMax":3.985906347619698,"treeMedian":3.467029229334085,"treeMax":4.254932807049768,"minChroma":0.043493002799658655}]}
+# Subtest: a single primary explores all perceptual coordinates within its explicit nearby domain
+ok 50 - a single primary explores all perceptual coordinates within its explicit nearby domain
+  ---
+  duration_ms: 571.2136
+  type: 'test'
+  ...
+# Subtest: style references remain soft: an explicit replacement domain is not vetoed by a hidden tube
+ok 51 - style references remain soft: an explicit replacement domain is not vetoed by a hidden tube
+  ---
+  duration_ms: 94.5836
+  type: 'test'
+  ...
+# Subtest: replacement guides default to the complete original palette, including when every position is selected
+ok 52 - replacement guides default to the complete original palette, including when every position is selected
+  ---
+  duration_ms: 2628.4916
+  type: 'test'
+  ...
+# Subtest: random additions use the current nearby style instead of choosing an unrelated hue
+ok 53 - random additions use the current nearby style instead of choosing an unrelated hue
+  ---
+  duration_ms: 0.9987
+  type: 'test'
+  ...
+1..53
+# tests 53
+# suites 0
+# pass 53
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 8768.9887

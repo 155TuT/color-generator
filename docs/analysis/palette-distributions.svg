@@ -1,0 +1,306 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="1180" viewBox="0 0 1320 1180" role="img" aria-label="水雾森林与暮山陶土在OKLab和OKLCh中的分布及最小生成树">
+<style>text{font-family:Segoe UI,Microsoft YaHei,sans-serif;fill:#293437} .label{font-size:12px}.point-index{font-size:10px}.sub{font-size:14px;fill:#59676a}.grid{stroke:#dce3e4;stroke-width:1}.edge{stroke:#71858c;stroke-width:1.3;opacity:.6}.dot{stroke:#fff;stroke-width:2}</style>
+<rect width="1320" height="1180" fill="#fafbfa"/>
+<text x="42" y="42" font-size="25" font-weight="600">紧邻而可融合：两套 25 色的空间分布</text>
+<text x="42" y="69" class="sub">圆点保留原始 HEX；序号对应输入顺序。连线为完整三维 OKLab 最小生成树的投影，投影长度不等于真实色差。</text>
+<text x="42" y="112" class="" font-size="21" font-weight="600">水雾森林</text>
+<text x="42" y="136" class="sub" >最近邻中位 3.13 · P90 3.91 · MST 最大边 5.5 (ΔEOK×100)</text>
+<text x="115" y="165" class="sub" >a–b 平面：色系关系（等比例）</text>
+<line x1="115" y1="178" x2="115" y2="498" class="grid"/>
+<text x="115" y="518" class="label" text-anchor="middle">-0.12</text>
+<line x1="195" y1="178" x2="195" y2="498" class="grid"/>
+<text x="195" y="518" class="label" text-anchor="middle">-0.06</text>
+<line x1="275" y1="178" x2="275" y2="498" class="grid"/>
+<text x="275" y="518" class="label" text-anchor="middle">0</text>
+<line x1="355" y1="178" x2="355" y2="498" class="grid"/>
+<text x="355" y="518" class="label" text-anchor="middle">0.06</text>
+<line x1="435" y1="178" x2="435" y2="498" class="grid"/>
+<text x="435" y="518" class="label" text-anchor="middle">0.12</text>
+<line x1="115" y1="498" x2="435" y2="498" class="grid"/>
+<text x="106" y="502" class="label" text-anchor="end">-0.12</text>
+<line x1="115" y1="418" x2="435" y2="418" class="grid"/>
+<text x="106" y="422" class="label" text-anchor="end">-0.06</text>
+<line x1="115" y1="338" x2="435" y2="338" class="grid"/>
+<text x="106" y="342" class="label" text-anchor="end">0</text>
+<line x1="115" y1="258" x2="435" y2="258" class="grid"/>
+<text x="106" y="262" class="label" text-anchor="end">0.06</text>
+<line x1="115" y1="178" x2="435" y2="178" class="grid"/>
+<text x="106" y="182" class="label" text-anchor="end">0.12</text>
+<text x="275" y="541" class="label" text-anchor="middle">a：绿 ← → 红</text>
+<text x="56" y="338" class="label" text-anchor="middle" transform="rotate(-90 56 338)">b：蓝 ← → 黄</text>
+<line x1="181.54" y1="371.98" x2="184.63" y2="381.85" class="edge"/>
+<line x1="184.63" y1="381.85" x2="185.89" y2="370.97" class="edge"/>
+<line x1="185.89" y1="370.97" x2="184.16" y2="392.32" class="edge"/>
+<line x1="184.16" y1="392.32" x2="193.27" y2="371.22" class="edge"/>
+<line x1="184.16" y1="392.32" x2="220.12" y2="412.44" class="edge"/>
+<line x1="193.27" y1="371.22" x2="191.17" y2="408.93" class="edge"/>
+<line x1="191.17" y1="408.93" x2="201.65" y2="371.09" class="edge"/>
+<line x1="191.17" y1="408.93" x2="204.46" y2="423.5" class="edge"/>
+<line x1="204.46" y1="423.5" x2="188.81" y2="390.58" class="edge"/>
+<line x1="188.81" y1="390.58" x2="207.3" y2="371.48" class="edge"/>
+<line x1="204.46" y1="423.5" x2="197.55" y2="434.67" class="edge"/>
+<line x1="197.55" y1="434.67" x2="188.17" y2="446.3" class="edge"/>
+<line x1="201.65" y1="371.09" x2="187.24" y2="328.3" class="edge"/>
+<line x1="188.17" y1="446.3" x2="203.85" y2="423.61" class="edge"/>
+<line x1="203.85" y1="423.61" x2="226.11" y2="374.04" class="edge"/>
+<line x1="226.11" y1="374.04" x2="211.96" y2="372.06" class="edge"/>
+<line x1="226.11" y1="374.04" x2="206.18" y2="359.83" class="edge"/>
+<line x1="206.18" y1="359.83" x2="229.7" y2="390.49" class="edge"/>
+<line x1="229.7" y1="390.49" x2="235.56" y2="406.08" class="edge"/>
+<line x1="206.18" y1="359.83" x2="200.29" y2="351.83" class="edge"/>
+<line x1="211.96" y1="372.06" x2="206.21" y2="322.58" class="edge"/>
+<line x1="206.21" y1="322.58" x2="190.44" y2="308.81" class="edge"/>
+<line x1="184.63" y1="381.85" x2="230.34" y2="404.62" class="edge"/>
+<line x1="206.18" y1="359.83" x2="202.12" y2="286.8" class="edge"/>
+<g><title>1 #307D81 L=0.5443 C=0.0746 h=199.98°</title><circle cx="181.54" cy="371.98" r="6" fill="#307D81" class="dot"/></g>
+<g><title>2 #38848D L=0.5697 C=0.0753 h=205.88°</title><circle cx="184.63" cy="381.85" r="6" fill="#38848D" class="dot"/></g>
+<g><title>3 #4E7790 L=0.549 C=0.0602 h=236.16°</title><circle cx="230.34" cy="404.62" r="6" fill="#4E7790" class="dot"/></g>
+<g><title>4 #41888C L=0.5829 C=0.0713 h=200.31°</title><circle cx="185.89" cy="370.97" r="6" fill="#41888C" class="dot"/></g>
+<g><title>5 #3E8D9B L=0.6 C=0.0794 h=210.88°</title><circle cx="184.16" cy="392.32" r="6" fill="#3E8D9B" class="dot"/></g>
+<g><title>6 #5689A5 L=0.6051 C=0.0694 h=233.6°</title><circle cx="220.12" cy="412.44" r="6" fill="#5689A5" class="dot"/></g>
+<g><title>7 #519196 L=0.6159 C=0.0662 h=202.12°</title><circle cx="193.27" cy="371.22" r="6" fill="#519196" class="dot"/></g>
+<g><title>8 #4A96AD L=0.6339 C=0.0824 h=220.24°</title><circle cx="191.17" cy="408.93" r="6" fill="#4A96AD" class="dot"/></g>
+<g><title>9 #5A9DBD L=0.6641 C=0.0831 h=230.48°</title><circle cx="204.46" cy="423.5" r="6" fill="#5A9DBD" class="dot"/></g>
+<g><title>10 #619AA0 L=0.6492 C=0.0604 h=204.28°</title><circle cx="201.65" cy="371.09" r="6" fill="#619AA0" class="dot"/></g>
+<g><title>11 #5CA5B3 L=0.6797 C=0.0757 h=211.38°</title><circle cx="188.81" cy="390.58" r="6" fill="#5CA5B3" class="dot"/></g>
+<g><title>12 #5CA8CD L=0.6972 C=0.0929 h=231.3°</title><circle cx="197.55" cy="434.67" r="6" fill="#5CA8CD" class="dot"/></g>
+<g><title>13 #66A08F L=0.6607 C=0.0662 h=173.69°</title><circle cx="187.24" cy="328.3" r="6" fill="#66A08F" class="dot"/></g>
+<g><title>14 #75AAB1 L=0.7035 C=0.0566 h=206.32°</title><circle cx="207.3" cy="371.48" r="6" fill="#75AAB1" class="dot"/></g>
+<g><title>15 #5BB3DD L=0.7288 C=0.1041 h=231.28°</title><circle cx="188.17" cy="446.3" r="6" fill="#5BB3DD" class="dot"/></g>
+<g><title>16 #7CAF94 L=0.7102 C=0.0671 h=160.96°</title><circle cx="190.44" cy="308.81" r="6" fill="#7CAF94" class="dot"/></g>
+<g><title>17 #87B9C1 L=0.7533 C=0.0537 h=208.38°</title><circle cx="211.96" cy="372.06" r="6" fill="#87B9C1" class="dot"/></g>
+<g><title>18 #79BDDE L=0.7652 C=0.0835 h=230.27°</title><circle cx="203.85" cy="423.61" r="6" fill="#79BDDE" class="dot"/></g>
+<g><title>19 #8CB7A5 L=0.7432 C=0.0529 h=167.36°</title><circle cx="206.21" cy="322.58" r="6" fill="#8CB7A5" class="dot"/></g>
+<g><title>20 #92BAC5 L=0.7636 C=0.0456 h=216.4°</title><circle cx="226.11" cy="374.04" r="6" fill="#92BAC5" class="dot"/></g>
+<g><title>21 #9AC3D7 L=0.7944 C=0.052 h=229.2°</title><circle cx="229.7" cy="390.49" r="6" fill="#9AC3D7" class="dot"/></g>
+<g><title>22 #91C5C6 L=0.7876 C=0.0542 h=197.6°</title><circle cx="206.18" cy="359.83" r="6" fill="#91C5C6" class="dot"/></g>
+<g><title>23 #9AD1CD L=0.8216 C=0.057 h=190.49°</title><circle cx="200.29" cy="351.83" r="6" fill="#9AD1CD" class="dot"/></g>
+<g><title>24 #A2CAE7 L=0.82 C=0.059 h=239.91°</title><circle cx="235.56" cy="406.08" r="6" fill="#A2CAE7" class="dot"/></g>
+<g><title>25 #A1C7A1 L=0.7917 C=0.0668 h=144.91°</title><circle cx="202.12" cy="286.8" r="6" fill="#A1C7A1" class="dot"/></g>
+<text x="690" y="165" class="sub" >h–L 平面：连续色相与明度</text>
+<line x1="709.82" y1="178" x2="709.82" y2="498" class="grid"/>
+<text x="709.82" y="518" class="label" text-anchor="middle">130</text>
+<line x1="828.75" y1="178" x2="828.75" y2="498" class="grid"/>
+<text x="828.75" y="518" class="label" text-anchor="middle">160</text>
+<line x1="947.68" y1="178" x2="947.68" y2="498" class="grid"/>
+<text x="947.68" y="518" class="label" text-anchor="middle">190</text>
+<line x1="1066.61" y1="178" x2="1066.61" y2="498" class="grid"/>
+<text x="1066.61" y="518" class="label" text-anchor="middle">220</text>
+<line x1="1185.54" y1="178" x2="1185.54" y2="498" class="grid"/>
+<text x="1185.54" y="518" class="label" text-anchor="middle">250</text>
+<line x1="690" y1="498" x2="1245" y2="498" class="grid"/>
+<text x="681" y="502" class="label" text-anchor="end">0.45</text>
+<line x1="690" y1="426.89" x2="1245" y2="426.89" class="grid"/>
+<text x="681" y="430.89" class="label" text-anchor="end">0.55</text>
+<line x1="690" y1="355.78" x2="1245" y2="355.78" class="grid"/>
+<text x="681" y="359.78" class="label" text-anchor="end">0.65</text>
+<line x1="690" y1="284.67" x2="1245" y2="284.67" class="grid"/>
+<text x="681" y="288.67" class="label" text-anchor="end">0.75</text>
+<line x1="690" y1="213.56" x2="1245" y2="213.56" class="grid"/>
+<text x="681" y="217.56" class="label" text-anchor="end">0.85</text>
+<line x1="690" y1="178" x2="1245" y2="178" class="grid"/>
+<text x="681" y="182" class="label" text-anchor="end">0.9</text>
+<text x="967.5" y="541" class="label" text-anchor="middle">展开色相 h（°；360° = 0°）</text>
+<text x="631" y="338" class="label" text-anchor="middle" transform="rotate(-90 631 338)">OKLab L</text>
+<line x1="987.25" y1="430.92" x2="1010.65" y2="412.89" class="edge"/>
+<line x1="1010.65" y1="412.89" x2="988.53" y2="403.51" class="edge"/>
+<line x1="988.53" y1="403.51" x2="1030.46" y2="391.35" class="edge"/>
+<line x1="1030.46" y1="391.35" x2="995.73" y2="380.02" class="edge"/>
+<line x1="1030.46" y1="391.35" x2="1120.52" y2="387.67" class="edge"/>
+<line x1="995.73" y1="380.02" x2="1067.54" y2="367.23" class="edge"/>
+<line x1="1067.54" y1="367.23" x2="1004.28" y2="356.36" class="edge"/>
+<line x1="1067.54" y1="367.23" x2="1108.14" y2="345.78" class="edge"/>
+<line x1="1108.14" y1="345.78" x2="1032.45" y2="334.62" class="edge"/>
+<line x1="1032.45" y1="334.62" x2="1012.37" y2="317.77" class="edge"/>
+<line x1="1108.14" y1="345.78" x2="1111.4" y2="322.24" class="edge"/>
+<line x1="1111.4" y1="322.24" x2="1111.31" y2="299.73" class="edge"/>
+<line x1="1004.28" y1="356.36" x2="883.04" y2="348.19" class="edge"/>
+<line x1="1111.31" y1="299.73" x2="1107.32" y2="273.86" class="edge"/>
+<line x1="1107.32" y1="273.86" x2="1052.32" y2="274.99" class="edge"/>
+<line x1="1052.32" y1="274.99" x2="1020.54" y2="282.31" class="edge"/>
+<line x1="1052.32" y1="274.99" x2="977.8" y2="257.94" class="edge"/>
+<line x1="977.8" y1="257.94" x2="1103.09" y2="253.1" class="edge"/>
+<line x1="1103.09" y1="253.1" x2="1145.55" y2="234.86" class="edge"/>
+<line x1="977.8" y1="257.94" x2="949.62" y2="233.74" class="edge"/>
+<line x1="1020.54" y1="282.31" x2="857.94" y2="289.52" class="edge"/>
+<line x1="857.94" y1="289.52" x2="832.54" y2="312.95" class="edge"/>
+<line x1="1010.65" y1="412.89" x2="1130.68" y2="427.57" class="edge"/>
+<line x1="977.8" y1="257.94" x2="768.93" y2="254.99" class="edge"/>
+<g><title>1 #307D81 L=0.5443 C=0.0746 h=199.98°</title><circle cx="987.25" cy="430.92" r="8" fill="#307D81" class="dot"/><text x="997.25" y="426.92" class="point-index" >1</text></g>
+<g><title>2 #38848D L=0.5697 C=0.0753 h=205.88°</title><circle cx="1010.65" cy="412.89" r="8" fill="#38848D" class="dot"/><text x="1020.65" y="408.89" class="point-index" >2</text></g>
+<g><title>3 #4E7790 L=0.549 C=0.0602 h=236.16°</title><circle cx="1130.68" cy="427.57" r="8" fill="#4E7790" class="dot"/><text x="1140.68" y="423.57" class="point-index" >3</text></g>
+<g><title>4 #41888C L=0.5829 C=0.0713 h=200.31°</title><circle cx="988.53" cy="403.51" r="8" fill="#41888C" class="dot"/><text x="998.53" y="399.51" class="point-index" >4</text></g>
+<g><title>5 #3E8D9B L=0.6 C=0.0794 h=210.88°</title><circle cx="1030.46" cy="391.35" r="8" fill="#3E8D9B" class="dot"/><text x="1040.46" y="387.35" class="point-index" >5</text></g>
+<g><title>6 #5689A5 L=0.6051 C=0.0694 h=233.6°</title><circle cx="1120.52" cy="387.67" r="8" fill="#5689A5" class="dot"/><text x="1130.52" y="383.67" class="point-index" >6</text></g>
+<g><title>7 #519196 L=0.6159 C=0.0662 h=202.12°</title><circle cx="995.73" cy="380.02" r="8" fill="#519196" class="dot"/><text x="1005.73" y="376.02" class="point-index" >7</text></g>
+<g><title>8 #4A96AD L=0.6339 C=0.0824 h=220.24°</title><circle cx="1067.54" cy="367.23" r="8" fill="#4A96AD" class="dot"/><text x="1077.54" y="363.23" class="point-index" >8</text></g>
+<g><title>9 #5A9DBD L=0.6641 C=0.0831 h=230.48°</title><circle cx="1108.14" cy="345.78" r="8" fill="#5A9DBD" class="dot"/><text x="1118.14" y="341.78" class="point-index" >9</text></g>
+<g><title>10 #619AA0 L=0.6492 C=0.0604 h=204.28°</title><circle cx="1004.28" cy="356.36" r="8" fill="#619AA0" class="dot"/><text x="1014.28" y="352.36" class="point-index" >10</text></g>
+<g><title>11 #5CA5B3 L=0.6797 C=0.0757 h=211.38°</title><circle cx="1032.45" cy="334.62" r="8" fill="#5CA5B3" class="dot"/><text x="1042.45" y="330.62" class="point-index" >11</text></g>
+<g><title>12 #5CA8CD L=0.6972 C=0.0929 h=231.3°</title><circle cx="1111.4" cy="322.24" r="8" fill="#5CA8CD" class="dot"/><text x="1121.4" y="318.24" class="point-index" >12</text></g>
+<g><title>13 #66A08F L=0.6607 C=0.0662 h=173.69°</title><circle cx="883.04" cy="348.19" r="8" fill="#66A08F" class="dot"/><text x="893.04" y="344.19" class="point-index" >13</text></g>
+<g><title>14 #75AAB1 L=0.7035 C=0.0566 h=206.32°</title><circle cx="1012.37" cy="317.77" r="8" fill="#75AAB1" class="dot"/><text x="1022.37" y="313.77" class="point-index" >14</text></g>
+<g><title>15 #5BB3DD L=0.7288 C=0.1041 h=231.28°</title><circle cx="1111.31" cy="299.73" r="8" fill="#5BB3DD" class="dot"/><text x="1121.31" y="295.73" class="point-index" >15</text></g>
+<g><title>16 #7CAF94 L=0.7102 C=0.0671 h=160.96°</title><circle cx="832.54" cy="312.95" r="8" fill="#7CAF94" class="dot"/><text x="842.54" y="308.95" class="point-index" >16</text></g>
+<g><title>17 #87B9C1 L=0.7533 C=0.0537 h=208.38°</title><circle cx="1020.54" cy="282.31" r="8" fill="#87B9C1" class="dot"/><text x="1030.54" y="278.31" class="point-index" >17</text></g>
+<g><title>18 #79BDDE L=0.7652 C=0.0835 h=230.27°</title><circle cx="1107.32" cy="273.86" r="8" fill="#79BDDE" class="dot"/><text x="1117.32" y="269.86" class="point-index" >18</text></g>
+<g><title>19 #8CB7A5 L=0.7432 C=0.0529 h=167.36°</title><circle cx="857.94" cy="289.52" r="8" fill="#8CB7A5" class="dot"/><text x="867.94" y="285.52" class="point-index" >19</text></g>
+<g><title>20 #92BAC5 L=0.7636 C=0.0456 h=216.4°</title><circle cx="1052.32" cy="274.99" r="8" fill="#92BAC5" class="dot"/><text x="1062.32" y="270.99" class="point-index" >20</text></g>
+<g><title>21 #9AC3D7 L=0.7944 C=0.052 h=229.2°</title><circle cx="1103.09" cy="253.1" r="8" fill="#9AC3D7" class="dot"/><text x="1113.09" y="249.1" class="point-index" >21</text></g>
+<g><title>22 #91C5C6 L=0.7876 C=0.0542 h=197.6°</title><circle cx="977.8" cy="257.94" r="8" fill="#91C5C6" class="dot"/><text x="987.8" y="253.94" class="point-index" >22</text></g>
+<g><title>23 #9AD1CD L=0.8216 C=0.057 h=190.49°</title><circle cx="949.62" cy="233.74" r="8" fill="#9AD1CD" class="dot"/><text x="959.62" y="229.74" class="point-index" >23</text></g>
+<g><title>24 #A2CAE7 L=0.82 C=0.059 h=239.91°</title><circle cx="1145.55" cy="234.86" r="8" fill="#A2CAE7" class="dot"/><text x="1155.55" y="230.86" class="point-index" >24</text></g>
+<g><title>25 #A1C7A1 L=0.7917 C=0.0668 h=144.91°</title><circle cx="768.93" cy="254.99" r="8" fill="#A1C7A1" class="dot"/><text x="778.93" y="250.99" class="point-index" >25</text></g>
+<text x="42" y="565" class="sub" >全 300 对色差中位 10.27，P90 20.79；底色间对比度中位 1.39，P90 2.16。</text>
+<text x="42" y="588" class="sub" >C 中位 0.067；L–C Pearson r = -0.327；色相沿最短覆盖弧展开，避免把跨 0° 的陶土与玫瑰割裂。</text>
+<text x="42" y="612" class="" font-size="21" font-weight="600">暮山陶土</text>
+<text x="42" y="636" class="sub" >最近邻中位 4.23 · P90 5.49 · MST 最大边 6.25 (ΔEOK×100)</text>
+<text x="115" y="665" class="sub" >a–b 平面：色系关系（等比例）</text>
+<line x1="115" y1="678" x2="115" y2="998" class="grid"/>
+<text x="115" y="1018" class="label" text-anchor="middle">-0.12</text>
+<line x1="195" y1="678" x2="195" y2="998" class="grid"/>
+<text x="195" y="1018" class="label" text-anchor="middle">-0.06</text>
+<line x1="275" y1="678" x2="275" y2="998" class="grid"/>
+<text x="275" y="1018" class="label" text-anchor="middle">0</text>
+<line x1="355" y1="678" x2="355" y2="998" class="grid"/>
+<text x="355" y="1018" class="label" text-anchor="middle">0.06</text>
+<line x1="435" y1="678" x2="435" y2="998" class="grid"/>
+<text x="435" y="1018" class="label" text-anchor="middle">0.12</text>
+<line x1="115" y1="998" x2="435" y2="998" class="grid"/>
+<text x="106" y="1002" class="label" text-anchor="end">-0.12</text>
+<line x1="115" y1="918" x2="435" y2="918" class="grid"/>
+<text x="106" y="922" class="label" text-anchor="end">-0.06</text>
+<line x1="115" y1="838" x2="435" y2="838" class="grid"/>
+<text x="106" y="842" class="label" text-anchor="end">0</text>
+<line x1="115" y1="758" x2="435" y2="758" class="grid"/>
+<text x="106" y="762" class="label" text-anchor="end">0.06</text>
+<line x1="115" y1="678" x2="435" y2="678" class="grid"/>
+<text x="106" y="682" class="label" text-anchor="end">0.12</text>
+<text x="275" y="1041" class="label" text-anchor="middle">a：绿 ← → 红</text>
+<text x="56" y="838" class="label" text-anchor="middle" transform="rotate(-90 56 838)">b：蓝 ← → 黄</text>
+<line x1="356.68" y1="811.32" x2="322.41" y2="839.59" class="edge"/>
+<line x1="356.68" y1="811.32" x2="389.84" y2="860.76" class="edge"/>
+<line x1="389.84" y1="860.76" x2="362.08" y2="869.77" class="edge"/>
+<line x1="362.08" y1="869.77" x2="299.36" y2="870.6" class="edge"/>
+<line x1="299.36" y1="870.6" x2="328.34" y2="822.32" class="edge"/>
+<line x1="328.34" y1="822.32" x2="380.09" y2="808.42" class="edge"/>
+<line x1="380.09" y1="808.42" x2="329.45" y2="813.88" class="edge"/>
+<line x1="329.45" y1="813.88" x2="354.14" y2="874.63" class="edge"/>
+<line x1="354.14" y1="874.63" x2="327.74" y2="824.68" class="edge"/>
+<line x1="327.74" y1="824.68" x2="362.55" y2="817.98" class="edge"/>
+<line x1="362.55" y1="817.98" x2="332.94" y2="852.64" class="edge"/>
+<line x1="332.94" y1="852.64" x2="371.99" y2="844.03" class="edge"/>
+<line x1="371.99" y1="844.03" x2="359.57" y2="795.92" class="edge"/>
+<line x1="359.57" y1="795.92" x2="402.48" y2="790.68" class="edge"/>
+<line x1="371.99" y1="844.03" x2="331.49" y2="833.11" class="edge"/>
+<line x1="331.49" y1="833.11" x2="326.82" y2="864.03" class="edge"/>
+<line x1="326.82" y1="864.03" x2="352.21" y2="862.69" class="edge"/>
+<line x1="362.55" y1="817.98" x2="329.26" y2="777.96" class="edge"/>
+<line x1="362.55" y1="817.98" x2="407.07" y2="811.83" class="edge"/>
+<line x1="407.07" y1="811.83" x2="416.84" y2="813.29" class="edge"/>
+<line x1="359.57" y1="795.92" x2="326.81" y2="770.44" class="edge"/>
+<line x1="354.14" y1="874.63" x2="353.97" y2="882.21" class="edge"/>
+<line x1="354.14" y1="874.63" x2="316.45" y2="909.53" class="edge"/>
+<line x1="299.36" y1="870.6" x2="274.58" y2="908.9" class="edge"/>
+<g><title>1 #8F5E5F L=0.5351 C=0.0644 h=18.09°</title><circle cx="356.68" cy="811.32" r="6" fill="#8F5E5F" class="dot"/></g>
+<g><title>2 #8D5270 L=0.5162 C=0.0878 h=348.79°</title><circle cx="389.84" cy="860.76" r="6" fill="#8D5270" class="dot"/></g>
+<g><title>3 #7A6068 L=0.5176 C=0.0356 h=358.08°</title><circle cx="322.41" cy="839.59" r="6" fill="#7A6068" class="dot"/></g>
+<g><title>4 #947374 L=0.588 C=0.0417 h=16.38°</title><circle cx="328.34" cy="822.32" r="6" fill="#947374" class="dot"/></g>
+<g><title>5 #916582 L=0.5621 C=0.0695 h=339.96°</title><circle cx="362.08" cy="869.77" r="6" fill="#916582" class="dot"/></g>
+<g><title>6 #7F7689 L=0.5804 C=0.0305 h=306.77°</title><circle cx="299.36" cy="870.6" r="6" fill="#7F7689" class="dot"/></g>
+<g><title>7 #A98582 L=0.65 C=0.0447 h=23.89°</title><circle cx="329.45" cy="813.88" r="6" fill="#A98582" class="dot"/></g>
+<g><title>8 #AD6D71 L=0.6045 C=0.0819 h=15.72°</title><circle cx="380.09" cy="808.42" r="6" fill="#AD6D71" class="dot"/></g>
+<g><title>9 #A0799B L=0.6254 C=0.0679 h=330.76°</title><circle cx="353.97" cy="882.21" r="6" fill="#A0799B" class="dot"/></g>
+<g><title>10 #B99799 L=0.708 C=0.0408 h=14.18°</title><circle cx="327.74" cy="824.68" r="6" fill="#B99799" class="dot"/></g>
+<g><title>11 #D07A88 L=0.6763 C=0.108 h=9.88°</title><circle cx="416.84" cy="813.29" r="6" fill="#D07A88" class="dot"/></g>
+<g><title>12 #7D89AB L=0.6327 C=0.0532 h=269.66°</title><circle cx="274.58" cy="908.9" r="6" fill="#7D89AB" class="dot"/></g>
+<g><title>13 #D39BA0 L=0.744 C=0.0674 h=12.88°</title><circle cx="362.55" cy="817.98" r="6" fill="#D39BA0" class="dot"/></g>
+<g><title>14 #DB8994 L=0.7179 C=0.101 h=11.21°</title><circle cx="407.07" cy="811.83" r="6" fill="#DB8994" class="dot"/></g>
+<g><title>15 #B289A8 L=0.6789 C=0.0654 h=335.16°</title><circle cx="354.14" cy="874.63" r="6" fill="#B289A8" class="dot"/></g>
+<g><title>16 #D0A48E L=0.7533 C=0.0607 h=47.9°</title><circle cx="329.26" cy="777.96" r="6" fill="#D0A48E" class="dot"/></g>
+<g><title>17 #C6A5B6 L=0.7563 C=0.0448 h=345.82°</title><circle cx="332.94" cy="852.64" r="6" fill="#C6A5B6" class="dot"/></g>
+<g><title>18 #AA9CC6 L=0.7191 C=0.062 h=300.09°</title><circle cx="316.45" cy="909.53" r="6" fill="#AA9CC6" class="dot"/></g>
+<g><title>19 #F39E9D L=0.7837 C=0.102 h=20.36°</title><circle cx="402.48" cy="790.68" r="6" fill="#F39E9D" class="dot"/></g>
+<g><title>20 #DFA5B9 L=0.7819 C=0.0729 h=356.44°</title><circle cx="371.99" cy="844.03" r="6" fill="#DFA5B9" class="dot"/></g>
+<g><title>21 #D4B8CE L=0.8132 C=0.0435 h=333.33°</title><circle cx="326.82" cy="864.03" r="6" fill="#D4B8CE" class="dot"/></g>
+<g><title>22 #E3A8A1 L=0.7849 C=0.0708 h=26.46°</title><circle cx="359.57" cy="795.92" r="6" fill="#E3A8A1" class="dot"/></g>
+<g><title>23 #D8B4BB L=0.8034 C=0.0425 h=4.95°</title><circle cx="331.49" cy="833.11" r="6" fill="#D8B4BB" class="dot"/></g>
+<g><title>24 #E5B9D3 L=0.8322 C=0.0608 h=342.26°</title><circle cx="352.21" cy="862.69" r="6" fill="#E5B9D3" class="dot"/></g>
+<g><title>25 #E6B99E L=0.819 C=0.0639 h=52.52°</title><circle cx="326.81" cy="770.44" r="6" fill="#E6B99E" class="dot"/></g>
+<text x="690" y="665" class="sub" >h–L 平面：连续色相与明度</text>
+<line x1="705.42" y1="678" x2="705.42" y2="998" class="grid"/>
+<text x="705.42" y="1018" class="label" text-anchor="middle">250</text>
+<line x1="813.33" y1="678" x2="813.33" y2="998" class="grid"/>
+<text x="813.33" y="1018" class="label" text-anchor="middle">285</text>
+<line x1="921.25" y1="678" x2="921.25" y2="998" class="grid"/>
+<text x="921.25" y="1018" class="label" text-anchor="middle">320</text>
+<line x1="1044.58" y1="678" x2="1044.58" y2="998" class="grid"/>
+<text x="1044.58" y="1018" class="label" text-anchor="middle">360</text>
+<line x1="1167.92" y1="678" x2="1167.92" y2="998" class="grid"/>
+<text x="1167.92" y="1018" class="label" text-anchor="middle">400</text>
+<line x1="690" y1="998" x2="1245" y2="998" class="grid"/>
+<text x="681" y="1002" class="label" text-anchor="end">0.45</text>
+<line x1="690" y1="926.89" x2="1245" y2="926.89" class="grid"/>
+<text x="681" y="930.89" class="label" text-anchor="end">0.55</text>
+<line x1="690" y1="855.78" x2="1245" y2="855.78" class="grid"/>
+<text x="681" y="859.78" class="label" text-anchor="end">0.65</text>
+<line x1="690" y1="784.67" x2="1245" y2="784.67" class="grid"/>
+<text x="681" y="788.67" class="label" text-anchor="end">0.75</text>
+<line x1="690" y1="713.56" x2="1245" y2="713.56" class="grid"/>
+<text x="681" y="717.56" class="label" text-anchor="end">0.85</text>
+<line x1="690" y1="678" x2="1245" y2="678" class="grid"/>
+<text x="681" y="682" class="label" text-anchor="end">0.9</text>
+<text x="967.5" y="1041" class="label" text-anchor="middle">展开色相 h（°；360° = 0°）</text>
+<text x="631" y="838" class="label" text-anchor="middle" transform="rotate(-90 631 838)">OKLab L</text>
+<line x1="1100.36" y1="937.46" x2="1038.67" y2="949.93" class="edge"/>
+<line x1="1100.36" y1="937.46" x2="1010.01" y2="950.9" class="edge"/>
+<line x1="1010.01" y1="950.9" x2="982.79" y2="918.28" class="edge"/>
+<line x1="982.79" y1="918.28" x2="880.45" y2="905.26" class="edge"/>
+<line x1="880.45" y1="905.26" x2="1095.09" y2="899.85" class="edge"/>
+<line x1="1095.09" y1="899.85" x2="1093.06" y2="888.14" class="edge"/>
+<line x1="1093.06" y1="888.14" x2="1118.24" y2="855.81" class="edge"/>
+<line x1="1118.24" y1="855.81" x2="968" y2="835.25" class="edge"/>
+<line x1="968" y1="835.25" x2="1088.3" y2="814.55" class="edge"/>
+<line x1="1088.3" y1="814.55" x2="1084.3" y2="788.92" class="edge"/>
+<line x1="1084.3" y1="788.92" x2="1000.87" y2="780.16" class="edge"/>
+<line x1="1000.87" y1="780.16" x2="1033.61" y2="761.99" class="edge"/>
+<line x1="1033.61" y1="761.99" x2="1126.16" y2="759.86" class="edge"/>
+<line x1="1126.16" y1="759.86" x2="1107.37" y2="760.72" class="edge"/>
+<line x1="1033.61" y1="761.99" x2="1059.85" y2="746.67" class="edge"/>
+<line x1="1059.85" y1="746.67" x2="962.35" y2="739.74" class="edge"/>
+<line x1="962.35" y1="739.74" x2="989.9" y2="726.19" class="edge"/>
+<line x1="1084.3" y1="788.92" x2="1192.26" y2="782.3" class="edge"/>
+<line x1="1084.3" y1="788.92" x2="1079.14" y2="807.49" class="edge"/>
+<line x1="1079.14" y1="807.49" x2="1075.06" y2="837.09" class="edge"/>
+<line x1="1126.16" y1="759.86" x2="1206.51" y2="735.63" class="edge"/>
+<line x1="968" y1="835.25" x2="954.42" y2="873.24" class="edge"/>
+<line x1="968" y1="835.25" x2="859.87" y2="806.61" class="edge"/>
+<line x1="880.45" y1="905.26" x2="766.04" y2="868.04" class="edge"/>
+<g><title>1 #8F5E5F L=0.5351 C=0.0644 h=18.09°</title><circle cx="1100.36" cy="937.46" r="8" fill="#8F5E5F" class="dot"/><text x="1110.36" y="933.46" class="point-index" >1</text></g>
+<g><title>2 #8D5270 L=0.5162 C=0.0878 h=348.79°</title><circle cx="1010.01" cy="950.9" r="8" fill="#8D5270" class="dot"/><text x="1020.01" y="946.9" class="point-index" >2</text></g>
+<g><title>3 #7A6068 L=0.5176 C=0.0356 h=358.08°</title><circle cx="1038.67" cy="949.93" r="8" fill="#7A6068" class="dot"/><text x="1048.67" y="945.93" class="point-index" >3</text></g>
+<g><title>4 #947374 L=0.588 C=0.0417 h=16.38°</title><circle cx="1095.09" cy="899.85" r="8" fill="#947374" class="dot"/><text x="1105.09" y="895.85" class="point-index" >4</text></g>
+<g><title>5 #916582 L=0.5621 C=0.0695 h=339.96°</title><circle cx="982.79" cy="918.28" r="8" fill="#916582" class="dot"/><text x="992.79" y="914.28" class="point-index" >5</text></g>
+<g><title>6 #7F7689 L=0.5804 C=0.0305 h=306.77°</title><circle cx="880.45" cy="905.26" r="8" fill="#7F7689" class="dot"/><text x="890.45" y="901.26" class="point-index" >6</text></g>
+<g><title>7 #A98582 L=0.65 C=0.0447 h=23.89°</title><circle cx="1118.24" cy="855.81" r="8" fill="#A98582" class="dot"/><text x="1128.24" y="851.81" class="point-index" >7</text></g>
+<g><title>8 #AD6D71 L=0.6045 C=0.0819 h=15.72°</title><circle cx="1093.06" cy="888.14" r="8" fill="#AD6D71" class="dot"/><text x="1103.06" y="884.14" class="point-index" >8</text></g>
+<g><title>9 #A0799B L=0.6254 C=0.0679 h=330.76°</title><circle cx="954.42" cy="873.24" r="8" fill="#A0799B" class="dot"/><text x="964.42" y="869.24" class="point-index" >9</text></g>
+<g><title>10 #B99799 L=0.708 C=0.0408 h=14.18°</title><circle cx="1088.3" cy="814.55" r="8" fill="#B99799" class="dot"/><text x="1098.3" y="810.55" class="point-index" >10</text></g>
+<g><title>11 #D07A88 L=0.6763 C=0.108 h=9.88°</title><circle cx="1075.06" cy="837.09" r="8" fill="#D07A88" class="dot"/><text x="1085.06" y="833.09" class="point-index" >11</text></g>
+<g><title>12 #7D89AB L=0.6327 C=0.0532 h=269.66°</title><circle cx="766.04" cy="868.04" r="8" fill="#7D89AB" class="dot"/><text x="776.04" y="864.04" class="point-index" >12</text></g>
+<g><title>13 #D39BA0 L=0.744 C=0.0674 h=12.88°</title><circle cx="1084.3" cy="788.92" r="8" fill="#D39BA0" class="dot"/><text x="1094.3" y="784.92" class="point-index" >13</text></g>
+<g><title>14 #DB8994 L=0.7179 C=0.101 h=11.21°</title><circle cx="1079.14" cy="807.49" r="8" fill="#DB8994" class="dot"/><text x="1089.14" y="803.49" class="point-index" >14</text></g>
+<g><title>15 #B289A8 L=0.6789 C=0.0654 h=335.16°</title><circle cx="968" cy="835.25" r="8" fill="#B289A8" class="dot"/><text x="978" y="831.25" class="point-index" >15</text></g>
+<g><title>16 #D0A48E L=0.7533 C=0.0607 h=47.9°</title><circle cx="1192.26" cy="782.3" r="8" fill="#D0A48E" class="dot"/><text x="1202.26" y="778.3" class="point-index" >16</text></g>
+<g><title>17 #C6A5B6 L=0.7563 C=0.0448 h=345.82°</title><circle cx="1000.87" cy="780.16" r="8" fill="#C6A5B6" class="dot"/><text x="1010.87" y="776.16" class="point-index" >17</text></g>
+<g><title>18 #AA9CC6 L=0.7191 C=0.062 h=300.09°</title><circle cx="859.87" cy="806.61" r="8" fill="#AA9CC6" class="dot"/><text x="869.87" y="802.61" class="point-index" >18</text></g>
+<g><title>19 #F39E9D L=0.7837 C=0.102 h=20.36°</title><circle cx="1107.37" cy="760.72" r="8" fill="#F39E9D" class="dot"/><text x="1117.37" y="756.72" class="point-index" >19</text></g>
+<g><title>20 #DFA5B9 L=0.7819 C=0.0729 h=356.44°</title><circle cx="1033.61" cy="761.99" r="8" fill="#DFA5B9" class="dot"/><text x="1043.61" y="757.99" class="point-index" >20</text></g>
+<g><title>21 #D4B8CE L=0.8132 C=0.0435 h=333.33°</title><circle cx="962.35" cy="739.74" r="8" fill="#D4B8CE" class="dot"/><text x="972.35" y="735.74" class="point-index" >21</text></g>
+<g><title>22 #E3A8A1 L=0.7849 C=0.0708 h=26.46°</title><circle cx="1126.16" cy="759.86" r="8" fill="#E3A8A1" class="dot"/><text x="1136.16" y="755.86" class="point-index" >22</text></g>
+<g><title>23 #D8B4BB L=0.8034 C=0.0425 h=4.95°</title><circle cx="1059.85" cy="746.67" r="8" fill="#D8B4BB" class="dot"/><text x="1069.85" y="742.67" class="point-index" >23</text></g>
+<g><title>24 #E5B9D3 L=0.8322 C=0.0608 h=342.26°</title><circle cx="989.9" cy="726.19" r="8" fill="#E5B9D3" class="dot"/><text x="999.9" y="722.19" class="point-index" >24</text></g>
+<g><title>25 #E6B99E L=0.819 C=0.0639 h=52.52°</title><circle cx="1206.51" cy="735.63" r="8" fill="#E6B99E" class="dot"/><text x="1216.51" y="731.63" class="point-index" >25</text></g>
+<text x="42" y="1065" class="sub" >全 300 对色差中位 11.72，P90 24.06；底色间对比度中位 1.48，P90 2.51。</text>
+<text x="42" y="1088" class="sub" >C 中位 0.064；L–C Pearson r = 0.074；色相沿最短覆盖弧展开，避免把跨 0° 的陶土与玫瑰割裂。</text>
+<text x="42" y="1162" class="label">复现：node scripts/analyze-palettes.mjs · 数据：docs/analysis/palettes.json · 量化分析不等同于审美评价或视觉可访问性认证。</text></svg>

@@ -1,0 +1,40 @@
+.color-space { min-width: 0; }
+.color-space-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+.color-space-slice { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; font-size: 12px; }
+.color-space-slice > span { color: var(--muted, #71786f); font-size: 11px; }
+.color-space-controls { display: flex; align-items: center; gap: 4px; }
+.color-space-controls button { min-width: 30px; min-height: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; padding: 0 7px; font-size: 11px; border-radius: 6px; }
+.color-space-controls .color-space-icon, .color-space-dialog-header .color-space-icon { width: 15px; height: 15px; flex-basis: 15px; }
+.color-space-controls button:disabled { cursor: default; }
+.color-space-zoom { min-width: 35px; text-align: center; font-size: 10px; color: var(--muted, #71786f); font-variant-numeric: tabular-nums; }
+.color-space-stage { position: relative; width: 100%; aspect-ratio: 1; isolation: isolate; overflow: hidden; border: 1px solid var(--line, #dedfd8); border-radius: 12px; background: #f7f7f7; }
+.color-space-canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: crosshair; }
+.color-space-canvas:focus-visible { outline: 3px solid #247c64; outline-offset: -4px; }
+.color-space-marker { position: absolute; pointer-events: none; width: 14px; height: 14px; transform: translate(-50%, -50%); border: 2px solid white; border-radius: 50%; box-shadow: 0 0 0 1.5px #233d34, 0 1px 5px #0005; z-index: 2; }
+.color-space-marker.is-hover { width: 11px; height: 11px; border: 1.5px solid white; box-shadow: 0 0 0 1px #0009; }
+.color-space-marker[hidden], .color-space-tooltip[hidden] { display: none; }
+.color-space-tooltip { position: absolute; width: 230px; max-width: calc(100% - 16px); z-index: 4; padding: 11px 12px; border: 1px solid #e0e4de; border-radius: 10px; background: rgba(255,255,255,.97); color: #25342e; box-shadow: 0 6px 24px #15291a29; pointer-events: none; line-height: 1.45; }
+.color-space-tooltip-head { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.color-space-tooltip-swatch { width: 23px; height: 23px; border: 1px solid #0002; border-radius: 6px; }
+.color-space-tooltip-metrics { margin-top: 8px; font-size: 11px; font-variant-numeric: tabular-nums; color: #636b64; }
+.color-space-tooltip-status { margin: 7px 0 0; font-size: 11px; font-weight: 600; }
+.color-space-tooltip[data-allowed=no] .color-space-tooltip-status { color: #82532c; }
+.color-space-tooltip-reason { margin: 5px 0 0; font-size: 10px; color: #686e67; overflow-wrap: anywhere; }
+.color-space-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 11px; font-size: 10px; color: var(--muted, #71786f); }
+.color-space-legend > span { display: inline-flex; align-items: center; gap: 6px; }
+.color-space-key { display: inline-block; width: 18px; height: 0; border-top: 2px solid #34463e; }
+.color-space-key.p3 { border-top: 2px dashed #81778e; }
+.color-space-key.chroma { height: 6px; border-top: 1.6px solid #9a5d22; border-bottom: 1.6px solid #9a5d22; }
+.color-space-key.domain { border-top: 2px dashed #247c64; }
+.color-space-key.hard { height: 9px; border: 0; background: repeating-linear-gradient(135deg, transparent 0 4px, #826b5980 4px 5px); }
+.color-space-note { margin: 10px 0 0; font-size: 11px; color: var(--muted, #71786f); }
+.color-space-status { margin: 6px 0 0; font-size: 11px; color: #557162; }
+.color-space-details { margin-top: 9px; font-size: 10px; color: var(--muted, #71786f); }
+.color-space-details summary { cursor: pointer; width: fit-content; }
+.color-space-details p { margin: 7px 0 0; line-height: 1.7; }
+.color-space-dialog { width: min(800px, calc(100vw - 28px)); max-height: calc(100dvh - 36px); padding: 20px; border: 1px solid #dce2d8; border-radius: 18px; background: #fff; color: #25342e; overflow-y: auto; }
+.color-space-dialog::backdrop { background: #18211bd1; backdrop-filter: blur(6px); }
+.color-space-dialog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.color-space-dialog-header button { width: 34px; min-width: 34px; height: 34px; min-height: 34px; padding: 0; }
+.color-space-dialog-content { max-width: min(100%, 68dvh); margin: auto; }
+@media (max-width: 500px) { .color-space-toolbar { align-items: flex-start; } .color-space-controls { margin-left: auto; } .color-space-dialog { padding: 14px; } }
