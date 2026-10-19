@@ -111,8 +111,8 @@ export function SavePaletteDialog({ initialName, initialDirectory, onDirectoryCh
         {directory && <p className="save-path">{directory.name}/{filename}</p>}
         <p className="help" role="status">{checking ? '正在检查同名文件…' : checkError || (existing
           ? '已找到同名文件，保存将替换原文件。'
-          : directory ? '将在此文件夹中新建文件。' : '选择保存文件夹；再次保存时会识别并替换同名文件。')}</p>
-      </div> : <p className="help">{supported ? '下载到浏览器设定的位置；需要替换同名文件时请选择“自选文件夹”。' : '当前浏览器不支持直接选择文件夹，请使用 Chrome 或 Edge 打开本地页面或 HTTPS 页面。'}</p>}
+          : directory ? '将在此文件夹中新建文件。' : '选择时由浏览器申请该文件夹的读写权限；再次保存会识别并替换同名文件。')}</p>
+      </div> : <p className="help">{supported ? '下载到浏览器设定的位置；需要替换同名文件时请选择“自选文件夹”。' : '当前浏览器不支持直接选择文件夹；可继续普通下载，或使用桌面 Chrome / Edge 打开 HTTPS 或 localhost 页面。'}</p>}
       {error && <p className="save-error" role="alert">{error}</p>}
       <div className="save-dialog-actions">
         <button type="button" disabled={pending} onClick={onClose}>取消</button>
