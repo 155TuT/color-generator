@@ -1,14 +1,25 @@
 import { parseColor } from './color';
-import type { ColorDomain, ConstraintConfig, GenerateOptions } from './types';
+import type { ColorDomain, ConstraintConfig } from './types';
 
 export const DEFAULT_CONSTRAINTS: ConstraintConfig = {
   minDeltaE: 1.4,
   maxBackgroundContrast: 3,
   textColor: '#FFFFFF',
-  minTextContrast: 1.65,
+  minTextContrast: 1.8,
   minChroma: 0.03,
   maxChroma: 0.11,
 };
+
+export const DEFAULT_RANDOM_LIGHTNESS: readonly [number, number] = [0.5, 0.82];
+
+/** The empty automatic workbench samples a usable lightness band, not a preset style. */
+export function defaultRandomDomain(constraints: Pick<ConstraintConfig, 'minChroma' | 'maxChroma'>): ColorDomain {
+  return {
+    lightness: [...DEFAULT_RANDOM_LIGHTNESS],
+    chroma: [constraints.minChroma ?? 0, constraints.maxChroma],
+    hue: [0, 360],
+  };
+}
 
 export interface DomainPadding {
   lightness?: number;
@@ -59,8 +70,9 @@ export function deriveDomainFromAnchors(anchors: readonly string[], padding: Dom
 }
 
 // Five primaries define the generator domain. The 25-color reference below is never a candidate source.
-export const WATERFOREST_ANCHORS: string[] = ['#307D81', '#66A08F', '#5BB3DD', '#A1C7A1', '#A2CAE7'];
+export const WATERFOREST_ANCHORS: string[] = ['#307D81', '#66A08F', '#5BB3DD', '#A1C7A1', '#9FC6E3'];
 export const DEFAULT_DOMAIN: ColorDomain = deriveDomainFromAnchors(WATERFOREST_ANCHORS);
+// Fixed example with at least 1.8:1 contrast against white text.
 export const WATERFOREST_COLORS: string[] = [
   '#307D81',
   '#38848D',
@@ -84,35 +96,24 @@ export const WATERFOREST_COLORS: string[] = [
   '#92BAC5',
   '#9AC3D7',
   '#91C5C6',
-  '#9AD1CD',
-  '#A2CAE7',
+  '#95CBC8',
+  '#9FC6E3',
   '#A1C7A1',
 ];
-export const WATERFOREST_REFERENCE = WATERFOREST_COLORS;
 
-/** User-supplied immutable example; preserve its original order and exact sRGB values. */
+/** Fixed clay, rose, mauve and muted-blue example. */
 export const CLAY_COLORS: string[] = [
   '#8F5E5F', '#8D5270', '#7A6068', '#947374', '#916582',
   '#7F7689', '#A98582', '#AD6D71', '#A0799B', '#B99799',
   '#D07A88', '#7D89AB', '#D39BA0', '#DB8994', '#B289A8',
   '#D0A48E', '#C6A5B6', '#AA9CC6', '#F39E9D', '#DFA5B9',
-  '#D4B8CE', '#E3A8A1', '#D8B4BB', '#E5B9D3', '#E6B99E',
+  '#D4B8CE', '#E3A8A1', '#D8B4BB', '#E0B4CE', '#E4B89D',
 ];
 
 // Six engineering representatives of clay, rose, mauve and muted blue.
 // They are editable starting inputs when explicitly loaded, never a hidden candidate source.
-export const CLAY_ANCHORS: string[] = ['#8F5E5F', '#916582', '#7D89AB', '#D07A88', '#D4B8CE', '#E6B99E'];
-// The example envelope covers all original colors; explicitly taking its primaries also loads this envelope.
+export const CLAY_ANCHORS: string[] = ['#8F5E5F', '#916582', '#7D89AB', '#D07A88', '#D4B8CE', '#E4B89D'];
+// The example envelope covers all colors.
 export const CLAY_DOMAIN: ColorDomain = deriveDomainFromAnchors(CLAY_COLORS);
 export const CLAY_CONSTRAINTS: ConstraintConfig = { ...DEFAULT_CONSTRAINTS, maxBackgroundContrast: 3.5 };
-export const CLAY_REFERENCE = CLAY_COLORS;
-
-export const WATERFOREST_WITNESS: GenerateOptions = {
-  anchors: [...WATERFOREST_ANCHORS],
-  constraints: { ...DEFAULT_CONSTRAINTS },
-  domain: deriveDomainFromAnchors(WATERFOREST_ANCHORS),
-  seed: 'waterforest-01',
-  targetCount: 25,
-  sampleCount: 16000,
-};
 

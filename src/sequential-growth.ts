@@ -3,7 +3,7 @@ import {
   type ColorMetrics, type Lch,
 } from './color';
 import { createCandidateChecker, halton, hueSpan, isInDomain, randomSource, validatePalette } from './generator';
-import { deriveDomainFromAnchors } from './presets';
+import { DEFAULT_RANDOM_LIGHTNESS, defaultRandomDomain, deriveDomainFromAnchors } from './presets';
 import { interpolateStyleColor, makeStyleModel, shortHueDifference } from './style-model';
 import type { GrowthNode, GrowthOperation, GrowthResult, GrowthState } from './growth-types';
 import type { Project } from './project';
@@ -52,6 +52,24 @@ function initialStyle(values: readonly string[], seed: string) {
   return { styleDomain: domain, directions, referenceColors: colors.map(color => color.hex) };
 }
 
+/** Keep generated-only continuations inside their lightness envelope without rewriting existing colors. */
+function retainGeneratedLightness(domain: ColorDomain, nodes: readonly GrowthNode[], previous?: ColorDomain | null): void {
+  if (!nodes.length || nodes.some(node => node.strategy === 'fixed')) return;
+  const lightness = nodes.map(node => parseColor(node.hex)!.lch.L);
+  const contains = (bounds: readonly [number, number]) => lightness.every(value =>
+    value >= bounds[0] - EPSILON && value <= bounds[1] + EPSILON);
+  // A deleted root must not gradually enlarge the surviving descendants' range.
+  // A previous automatic envelope may be irrelevant to explicitly manual-domain growth.
+  if (previous && contains(previous.lightness)) {
+    domain.lightness = [Math.max(domain.lightness[0], previous.lightness[0]), Math.min(domain.lightness[1], previous.lightness[1])];
+  }
+  // Keep existing colors outside the default band, including explicit custom-domain results.
+  // Redrawing the whole automatic palette starts inside the default band.
+  if (contains(DEFAULT_RANDOM_LIGHTNESS)) {
+    domain.lightness = [Math.max(domain.lightness[0], DEFAULT_RANDOM_LIGHTNESS[0]), Math.min(domain.lightness[1], DEFAULT_RANDOM_LIGHTNESS[1])];
+  }
+}
+
 /** Match HEX queues so sorting and duplicate hand-edited colors cannot scramble birth order. */
 export function synchronizeGrowth(project: Project): GrowthState {
   const previous = project.growth ? structuredClone(project.growth) : emptyGrowth();
@@ -79,18 +97,17 @@ export function synchronizeGrowth(project: Project): GrowthState {
     }
   });
   if (!nodes.length) return emptyGrowth();
-  const style = changedInput || nodes.length < previous.nodes.length || !previous.styleDomain
-    ? initialStyle(nodes.map(node => node.hex), project.seed)
+  const rebuildStyle = changedInput || nodes.length < previous.nodes.length || !previous.styleDomain;
+  const style = rebuildStyle ? initialStyle(nodes.map(node => node.hex), project.seed)
     : { styleDomain: previous.styleDomain, directions: previous.directions, referenceColors: previous.referenceColors };
+  if (rebuildStyle && style.styleDomain) retainGeneratedLightness(style.styleDomain, nodes, previous.styleDomain);
   return { version: 1, nextOrder, nodes, ...style };
 }
 
 /** A stable style envelope makes repeated one-step actions identical to a single completion. */
 export function automaticGrowthDomain(project: Project): ColorDomain {
   const growth = synchronizeGrowth(project);
-  return growth.styleDomain ? structuredClone(growth.styleDomain) : {
-    lightness: [0, 1], chroma: [project.constraints.minChroma ?? 0, project.constraints.maxChroma], hue: [0, 360],
-  };
+  return growth.styleDomain ? structuredClone(growth.styleDomain) : defaultRandomDomain(project.constraints);
 }
 
 function branchFor(color: Pick<ColorMetrics, 'lch'>, directions: readonly number[]): number {
@@ -101,24 +118,26 @@ function branchFor(color: Pick<ColorMetrics, 'lch'>, directions: readonly number
   return best;
 }
 
-function sampleRoot(project: Project, excluded: ReadonlySet<string>, stats: GenerationStats): string | null {
+function sampleRoot(project: Project, domain: ColorDomain, excluded: ReadonlySet<string>, stats: GenerationStats): string | null {
   const random = randomSource(project.seed + ':root');
   const offsets = [random(), random(), random()];
-  const minimumChroma = project.constraints.minChroma ?? 0;
-  const maximumChroma = project.constraints.maxChroma;
+  const minimumChroma = Math.max(domain.chroma[0], project.constraints.minChroma ?? 0);
+  const maximumChroma = Math.min(domain.chroma[1], project.constraints.maxChroma);
+  if (minimumChroma > maximumChroma + EPSILON) return null;
+  const checker = createCandidateChecker([], project.constraints, domain);
+  const span = hueSpan(domain);
   stats.attempts++;
   for (let index = 1; index <= 16000; index++) {
     stats.sampled++;
     const hex = oklchToHex({
-      L: (halton(index, 2) + offsets[0]) % 1,
+      L: domain.lightness[0] + ((halton(index, 2) + offsets[0]) % 1) * (domain.lightness[1] - domain.lightness[0]),
       C: Math.sqrt(minimumChroma ** 2 + ((halton(index, 3) + offsets[1]) % 1) * (maximumChroma ** 2 - minimumChroma ** 2)),
-      h: ((halton(index, 5) + offsets[2]) % 1) * 360,
+      h: wrap(domain.hue[0] + ((halton(index, 5) + offsets[2]) % 1) * span),
     });
     if (!hex) { stats.gamutRejected++; continue; }
     if (excluded.has(hex)) continue;
-    // The first color deliberately ignores the text rule and custom domain, but obeys both chroma bounds.
-    const actualChroma = parseColor(hex)!.lch.C;
-    if (actualChroma < minimumChroma - EPSILON || actualChroma > maximumChroma + EPSILON) {
+    // The first actual HEX obeys the same text, chroma and domain checks as every later color.
+    if (!checker(hex).hardAllowed) {
       stats.hardRejected++; continue;
     }
     stats.uniqueCandidates++;
@@ -218,7 +237,9 @@ function nextColor(
           + Math.max(0, singleRootBand.low - candidate.lch.C) * 0.25)
         : 100 * (Math.abs(candidate.lch.C - nearbyReference.lch.C)
           + Math.max(0, nearbyReference.lch.C - candidate.lch.C) * 0.25);
-      const hueGoal = Math.abs(shortHueDifference(state.directions[branch], candidate.lch.h));
+      // Nearby directions describe overlapping bands, not narrow attracting columns.
+      // Adjacent single-root centers are 35 degrees apart; these soft bands join between them.
+      const hueGoal = Math.max(0, Math.abs(shortHueDifference(state.directions[branch], candidate.lch.h)) - 18);
       const score = targetLab
         ? deltaE(candidate.lab, targetLab) * 2 + chromaDeviation * 0.4 + Math.abs(nearest - longestDistance / 2) * 0.15
         : Math.abs(nearest - preferredStep) * 1.6
@@ -247,9 +268,7 @@ export function growPalette(project: Project, operation: GrowthOperation): Growt
     status: 'failure', colors: original, growth: inputState, changedIndices: [],
     validation: originalValidation, seed, stats, diagnostics: messages, partialColors,
   });
-  const allSelected = operation.kind === 'randomize' && original.length > 0
-    && new Set(operation.indices ?? []).size === original.length;
-  const configuration = validatePalette([], project.constraints, project.domainMode === 'manual' && !allSelected ? project.domain : undefined);
+  const configuration = validatePalette([], project.constraints, project.domainMode === 'manual' ? project.domain : undefined);
   if (!configuration.valid) return failure(configuration.issues.map(issue => issue.message));
   if (original.length > 25) return failure(['当前色板超过 25 色，无法继续生成。']);
   const selected = [...new Set(operation.indices ?? [])].sort((a, b) => a - b);
@@ -259,7 +278,6 @@ export function growPalette(project: Project, operation: GrowthOperation): Growt
   if (operation.kind === 'add' && original.length >= 25) return failure(['色板已满 25 色。']);
   const replace = operation.kind === 'randomize';
   const reset = replace && selected.length === original.length;
-  if (reset) project = { ...project, domainMode: 'auto' };
   const selectedSet = new Set(selected);
   const fixed = replace ? original.filter((_, index) => !selectedSet.has(index)) : original;
   let state = reset ? emptyGrowth() : synchronizeGrowth({ ...project, colors: fixed, growth: inputState });
@@ -276,30 +294,33 @@ export function growPalette(project: Project, operation: GrowthOperation): Growt
     : state.styleDomain ? structuredClone(state.styleDomain) : automaticGrowthDomain({ ...project, colors: [], growth: undefined });
 
   while (state.nodes.length < targetCount) {
+    if (Math.max(domain.chroma[0], project.constraints.minChroma ?? 0)
+      > Math.min(domain.chroma[1], project.constraints.maxChroma) + EPSILON) {
+      return failure(['生成范围的彩度区间与硬性彩度范围没有交集，请调整彩度边界。'], appended);
+    }
     if (!state.nodes.length) {
-      const hex = sampleRoot(project, excluded, stats);
-      if (!hex) return failure(['当前彩度范围和有限采样预算内没有找到新的 sRGB 首色。']);
+      const hex = sampleRoot(project, domain, excluded, stats);
+      if (!hex) return failure(['当前生成范围与文字对比、彩度约束下，有限采样没有找到可用的 sRGB 首色；原色板保持不变。']);
       const style = initialStyle([hex], seed);
       state = { version: 1, nextOrder: 1, nodes: [{
         id: 'color-0', hex, birthOrder: 0, parentId: null, strategy: 'seed', distance: null, branch: 1,
       }], ...style };
       appended.push(hex);
-      if (project.domainMode === 'auto') domain = structuredClone(state.styleDomain!);
+      if (project.domainMode === 'auto') {
+        retainGeneratedLightness(state.styleDomain!, state.nodes);
+        domain = structuredClone(state.styleDomain!);
+      }
       continue;
-    }
-    if (Math.max(domain.chroma[0], project.constraints.minChroma ?? 0)
-      > Math.min(domain.chroma[1], project.constraints.maxChroma) + EPSILON) {
-      return failure(['生成范围的彩度区间与硬性彩度范围没有交集，请调整彩度边界。'], appended);
     }
     const baseline = validatePalette(state.nodes.map(node => node.hex), project.constraints, domain);
     if (!baseline.valid) return failure([
       ...baseline.issues.map(issue => issue.message),
-      '已有颜色不满足后续生成规则。首色仅检查 sRGB 与彩度上下界；请调整该色或规则后继续，原色板保持不变。',
+      '已有颜色不满足后续生成规则；请调整颜色或规则后继续，原色板保持不变。',
     ], appended);
     const node = nextColor(project, state, domain, excluded, stats);
     if (!node) return failure([
       `本次有限搜索在 ${state.nodes.length}/${targetCount} 色处停止，未降低色差、对比或彩度约束。`,
-      '未找到完整结果，原色板保持不变；可更换种子或调整生成范围。',
+      '未找到完整结果，原色板保持不变；可调整生成范围，或随机更换选中颜色后重试。',
     ], appended);
     state.nodes.push(node);
     state.nextOrder++;
@@ -313,11 +334,10 @@ export function growPalette(project: Project, operation: GrowthOperation): Growt
     changedIndices = selected;
   }
   const validation = validatePalette(colors, project.constraints, domain);
-  // A one-color result is the deliberately unconstrained starting point, not a false full-rule pass.
-  if (colors.length > 1 && !validation.valid) return failure(validation.issues.map(issue => issue.message), appended);
+  if (!validation.valid) return failure(validation.issues.map(issue => issue.message), appended);
   const diagnostics = colors.length === 1
-    ? ['首色只按 sRGB 与彩度上下界抽取；文字对比与自定义范围保留真实检查结果。']
+    ? ['首色已通过生成范围、文字对比与彩度约束的实际 HEX 检查。']
     : [`按出生顺序完成 ${appended.length} 步：远处补衔接，近处沿相邻色系探索；实际 HEX 通过全部硬约束。`];
   return { status: 'success', colors, validation, diagnostics, seed, stats, growth: state, changedIndices,
-    ...(reset ? { domainMode: 'auto' as const } : {}) };
+    ...(reset ? { domainMode: project.domainMode } : {}) };
 }

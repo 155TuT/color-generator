@@ -53,7 +53,12 @@ export function pearson(left: readonly number[], right: readonly number[]): numb
   return leftVariance && rightVariance ? covariance / Math.sqrt(leftVariance * rightVariance) : null;
 }
 
-const normalizeHue = (hue: number) => ((hue % 360) + 360) % 360;
+const normalizeHue = (hue: number) => {
+  const normalized = ((hue % 360) + 360) % 360;
+  // Subtracting the normalized arc start can leave -5e-14 degrees at its first point.
+  // That is the start of the arc, not a spurious point one full turn away.
+  return normalized < 1e-10 || normalized > 360 - 1e-10 ? 0 : normalized;
+};
 
 export function minimalHueArc(hues: readonly number[]): { start: number; end: number; span: number } {
   if (!hues.length) return { start: 0, end: 0, span: 0 };

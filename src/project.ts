@@ -8,7 +8,7 @@ import {
   CLAY_COLORS,
   CLAY_DOMAIN,
   CLAY_CONSTRAINTS,
-  deriveDomainFromAnchors,
+  defaultRandomDomain,
 } from './presets';
 import type { ColorDomain, ConstraintConfig } from './types';
 import type { GrowthState } from './growth-types';
@@ -30,8 +30,6 @@ export interface ExampleProject extends Project {
   anchors: string[];
 }
 
-const emptyDomain = (): ColorDomain => ({ lightness: [0.45, 0.82], chroma: [0.02, 0.11], hue: [0, 360] });
-
 /** A fresh session has one empty palette; a name is chosen only when saving. */
 export function createProject(): Project {
   return {
@@ -39,7 +37,7 @@ export function createProject(): Project {
     name: '',
     colors: [],
     constraints: structuredClone(DEFAULT_CONSTRAINTS),
-    domain: emptyDomain(),
+    domain: defaultRandomDomain(DEFAULT_CONSTRAINTS),
     seed: 'palette-01',
     domainMode: 'auto',
   };
