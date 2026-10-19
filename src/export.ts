@@ -37,7 +37,7 @@ function preparePalette(colors: string[], textColor: string, title: string) {
   };
 }
 
-function safeFilename(value: string, extension: string): string {
+export function safeFilename(value: string, extension: string): string {
   const cleaned = String(value)
     .replace(/[\u0000-\u001f\u007f<>:"/\\|?*]/g, '-')
     .replace(/[. ]+$/g, '')
@@ -47,7 +47,7 @@ function safeFilename(value: string, extension: string): string {
   return protectedBase.toLowerCase().endsWith(extension) ? protectedBase : `${protectedBase}${extension}`;
 }
 
-function downloadBlob(blob: Blob, filename: string): void {
+export function downloadBlob(blob: Blob, filename: string): void {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
@@ -73,15 +73,17 @@ function escapeXml(value: string): string {
   });
 }
 
-export function exportJson(data: unknown, filename = 'course-palette.json'): void {
+export interface ExportFile { blob: Blob; filename: string }
+
+export function createJsonExport(data: unknown, filename = 'course-palette.json'): ExportFile {
   const json = JSON.stringify(data, null, 2);
   if (json === undefined) {
     throw new Error('无法导出：数据不能序列化为 JSON。');
   }
-  downloadBlob(new Blob([`${json}\n`], { type: 'application/json;charset=utf-8' }), safeFilename(filename, '.json'));
+  return { blob: new Blob([`${json}\n`], { type: 'application/json;charset=utf-8' }), filename: safeFilename(filename, '.json') };
 }
 
-export function exportSvg(colors: string[], textColor: string, title = DEFAULT_TITLE): void {
+export function createSvgExport(colors: string[], textColor: string, title = DEFAULT_TITLE): ExportFile {
   const palette = preparePalette(colors, textColor, title);
   const parts = [
     '<?xml version="1.0" encoding="UTF-8"?>',
@@ -112,13 +114,10 @@ export function exportSvg(colors: string[], textColor: string, title = DEFAULT_T
     `<text x="${MARGIN}" y="${palette.height - 36}" font-size="13" fill="#65716D">色序 · Course Color Studio / sRGB · 颜色编号对应 JSON 中的顺序</text>`,
     '</g></svg>',
   );
-  downloadBlob(
-    new Blob([parts.join('\n')], { type: 'image/svg+xml;charset=utf-8' }),
-    safeFilename(palette.title, '.svg'),
-  );
+  return { blob: new Blob([parts.join('\n')], { type: 'image/svg+xml;charset=utf-8' }), filename: safeFilename(palette.title, '.svg') };
 }
 
-export function exportPng(colors: string[], textColor: string, title = DEFAULT_TITLE): void {
+export async function createPngExport(colors: string[], textColor: string, title = DEFAULT_TITLE): Promise<ExportFile> {
   const palette = preparePalette(colors, textColor, title);
   const canvas = document.createElement('canvas');
   canvas.width = WIDTH;
@@ -155,11 +154,9 @@ export function exportPng(colors: string[], textColor: string, title = DEFAULT_T
 
   context.font = `13px ${FONT}`;
   context.fillText('色序 · Course Color Studio / sRGB · 颜色编号对应 JSON 中的顺序', MARGIN, palette.height - 36);
-  canvas.toBlob(blob => {
-    if (blob) {
-      downloadBlob(blob, safeFilename(palette.title, '.png'));
-    } else {
-      window.alert('浏览器未能生成 PNG，请尝试导出 SVG。');
-    }
-  }, 'image/png');
+  const blob = await new Promise<Blob>((resolve, reject) => canvas.toBlob(value => {
+    if (value) resolve(value);
+    else reject(new Error('浏览器未能生成 PNG，请尝试导出 SVG。'));
+  }, 'image/png'));
+  return { blob, filename: safeFilename(palette.title, '.png') };
 }

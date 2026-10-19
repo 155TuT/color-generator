@@ -76,7 +76,6 @@ export function PaletteAnalysis({ project, domain, validation, activeIndex, sele
         <div><dt>色相 h 范围</dt><dd>{number(domain.hue[0], 1)}° → {number(domain.hue[1], 1)}°</dd></div>
         <div><dt>彩度 C 范围</dt><dd>{number(domain.chroma[0], 3)} – {number(domain.chroma[1], 3)}</dd></div>
         <div><dt>范围状态</dt><dd>{project.domainMode === 'auto' ? '自动生长范围' : '固定自定义范围'}</dd></div>
-        <div><dt>生成种子</dt><dd>{project.seed || '（空）'}</dd></div>
       </dl>
     </section>
   </section>;

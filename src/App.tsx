@@ -1,19 +1,22 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowUpRight, BookOpen, CheckSquare, Download, Palette, Plus, Square } from 'lucide-react';
+import { ArrowUpRight, BookOpen, CheckSquare, Palette, Plus, Square } from 'lucide-react';
 import { normalizeHex } from './color';
 import { sortPalette, validatePalette } from './generator';
-import { createProject, effectiveDomain, makeExample, snapshotProject, type Project } from './project';
+import { createProject, effectiveDomain, snapshotProject, type Project } from './project';
 import { synchronizeGrowth } from './sequential-growth';
-import { exportJson, exportPng, exportSvg } from './export';
+import { createJsonExport, createPngExport, createSvgExport, downloadBlob } from './export';
+import { saveBlobToDirectory, type SaveDirectoryHandle } from './file-save';
+import { buildProjectExport, parseProjectJson, PROJECT_JSON_MAX_BYTES } from './project-io';
+import { commitHistory, createHistory, endHistoryGroup, historyShortcut, redoHistory, sameSnapshot, undoHistory } from './history';
 import type { GrowthOperation, GrowthResult } from './growth-types';
 import { ColorEditor, type EditorTarget } from './components/ColorEditor';
-import { GlobalSettings, type PresetId } from './components/GlobalSettings';
-import { PalettePreview } from './components/PalettePreview';
+import { GlobalSettings } from './components/GlobalSettings';
 import { PaletteAnalysis } from './components/PaletteAnalysis';
 import { PaletteToolbar } from './components/PaletteToolbar';
 import { SavePaletteDialog, type PaletteExportFormat } from './components/SavePaletteDialog';
 
-type Preview = { project: Project; preset: PresetId };
+type WorkbenchSnapshot = { project: Project; editor: EditorTarget | null; selected: Set<number>; lastSelected: number };
+type InteractionPatch = Partial<Omit<WorkbenchSnapshot, 'project'>>;
 
 // Track colors by their old slots, including equal HEX values, when order changes.
 function positionMap(previous: string[], next: string[]): Map<number, number> {
@@ -32,13 +35,21 @@ export function App() {
   const [editor, setEditor] = useState<EditorTarget | null>(null);
   const [selected, setSelected] = useState<Set<number>>(() => new Set());
   const [lastSelected, setLastSelected] = useState(0);
-  const [preview, setPreview] = useState<Preview | null>(null);
-  const [saveFormat, setSaveFormat] = useState<PaletteExportFormat | null>(null);
+  const [saveOpen, setSaveOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState({ text: '', error: false });
   const [toast, setToast] = useState('');
+  const [editorRevision, setEditorRevision] = useState(0);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const worker = useRef<Worker | null>(null);
+  const importInput = useRef<HTMLInputElement>(null);
+  const saveDirectory = useRef<SaveDirectoryHandle | null>(null);
+  const importRequest = useRef(0);
+  const history = useRef(createHistory<WorkbenchSnapshot>());
+  const gesture = useRef<string | null>(null);
+  const gestureCount = useRef(0);
+  const projectRef = useRef(project);
+  projectRef.current = project;
   const interaction = useRef({ editor, selected, lastSelected });
   interaction.current = { editor, selected, lastSelected };
   const domain = useMemo(() => effectiveDomain(project), [project.colors, project.domain, project.domainMode, project.growth, project.constraints.minChroma, project.constraints.maxChroma]);
@@ -54,12 +65,67 @@ export function App() {
     toastTimer.current = setTimeout(() => setToast(''), 4500);
   }, []);
   const cancel = useCallback(() => { worker.current?.terminate(); worker.current = null; setBusy(false); }, []);
+  const currentSnapshot = useCallback((): WorkbenchSnapshot => ({ project: projectRef.current, ...interaction.current }), []);
+  const applySnapshot = useCallback((value: WorkbenchSnapshot) => {
+    projectRef.current = value.project;
+    interaction.current = { editor: value.editor, selected: value.selected, lastSelected: value.lastSelected };
+    setProject(value.project); setEditor(value.editor); setSelected(value.selected); setLastSelected(value.lastSelected);
+  }, []);
+  const finishGesture = useCallback(() => {
+    gesture.current = null; history.current = endHistoryGroup(history.current);
+  }, []);
+  const beginGesture = useCallback((target: EventTarget | null) => {
+    if (!(target instanceof HTMLInputElement)) return;
+    if (!['range', 'color'].includes(target.type)) return;
+    finishGesture(); gesture.current = `edit-${++gestureCount.current}`;
+  }, [finishGesture]);
+  const commitProject = useCallback((next: Project, patch: InteractionPatch = {}) => {
+    const before = currentSnapshot(), after = { ...before, ...patch, project: next };
+    history.current = commitHistory(history.current, before, after, {
+      group: gesture.current, equals: (left, right) => sameSnapshot(left.project, right.project),
+    });
+    importRequest.current++;
+    applySnapshot(after);
+  }, [currentSnapshot, applySnapshot]);
+  useEffect(() => {
+    const keydown = (event: KeyboardEvent) => {
+      const action = historyShortcut(event);
+      if (!action) {
+        if (!gesture.current && event.target instanceof HTMLInputElement && event.target.type === 'range'
+          && ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown'].includes(event.key)) beginGesture(event.target);
+        return;
+      }
+      // Modal text editing keeps its native behavior and cannot change the palette behind it.
+      if (document.querySelector('dialog[open]')) return;
+      event.preventDefault(); cancel(); finishGesture(); importRequest.current++;
+      setNotice({ text: '', error: false });
+      const result = (action === 'undo' ? undoHistory : redoHistory)(history.current, currentSnapshot());
+      if (!result) return;
+      history.current = result.history; applySnapshot(result.value);
+      setEditorRevision(value => value + 1);
+    };
+    const endRangeGesture = (event: Event) => {
+      if (event.target instanceof HTMLInputElement && event.target.type === 'color') return;
+      finishGesture();
+    };
+    window.addEventListener('keydown', keydown);
+    window.addEventListener('keyup', endRangeGesture);
+    window.addEventListener('pointerup', endRangeGesture);
+    window.addEventListener('pointercancel', endRangeGesture);
+    return () => {
+      window.removeEventListener('keydown', keydown);
+      window.removeEventListener('keyup', endRangeGesture);
+      window.removeEventListener('pointerup', endRangeGesture);
+      window.removeEventListener('pointercancel', endRangeGesture);
+    };
+  }, [applySnapshot, beginGesture, cancel, currentSnapshot, finishGesture]);
   const editStart = useCallback(() => {
+    importRequest.current++;
     if (worker.current) { cancel(); setNotice({ text: '参数正在编辑，已取消上一轮计算。', error: false }); }
   }, [cancel]);
-  const updateProject = useCallback((next: Project, text: string) => {
-    cancel(); setProject({ ...next, growth: synchronizeGrowth(next) }); setNotice({ text, error: false });
-  }, [cancel]);
+  const updateProject = useCallback((next: Project, text: string, patch: InteractionPatch = {}) => {
+    cancel(); commitProject({ ...next, growth: synchronizeGrowth(next) }, patch); setNotice({ text, error: false });
+  }, [cancel, commitProject]);
 
   function setColor(value: string) {
     const hex = normalizeHex(value);
@@ -68,53 +134,38 @@ export function App() {
     updateProject({ ...project, colors }, '颜色已更新，当前色板已重新检查。');
   }
 
-  function addColor(value: string) {
-    const hex = normalizeHex(value);
-    if (!hex) return;
-    if (isFull) { showToast('色板已有 25 色，请先删除要替换的颜色。'); return; }
-    updateProject({ ...project, colors: [...project.colors, hex] }, '');
-    setEditor({ index: project.colors.length });
-  }
-
   function addRandomColor() {
     runOperation({ kind: 'add' });
   }
 
   function deleteSelected() {
-    if (!selected.size) return;
+    if (!selected.size || busy) return;
     const positions = new Map<number, number>();
     const colors = project.colors.filter((_, index) => {
       if (selected.has(index)) return false;
       positions.set(index, positions.size); return true;
     });
-    updateProject({ ...project, colors }, '已删除 ' + selected.size + ' 色。' + (colors.length ? '生成将保留其余颜色并补齐到 25 色。' : '点击加号添加新的颜色。'));
-    setSelected(new Set());
-    setEditor(colors.length ? { index: editor ? positions.get(editor.index) ?? Math.min(editor.index, colors.length - 1) : 0 } : null);
-    setLastSelected(positions.get(lastSelected) ?? 0);
-  }
-
-  function usePreset(id: PresetId) {
-    const preset = makeExample(id);
-    updateProject({ ...project, name: '', colors: [...preset.anchors], growth: undefined, domain: structuredClone(preset.domain), domainMode: 'manual',
-      constraints: { ...preset.constraints, textColor: project.constraints.textColor, minTextContrast: project.constraints.minTextContrast } },
-    '已取用' + preset.name + '的 ' + preset.anchors.length + ' 个代表色。点击生成补齐到 25 色。');
-    setEditor({ index: 0 }); setSelected(new Set()); setLastSelected(0); setPreview(null);
+    updateProject({ ...project, colors }, '已删除 ' + selected.size + ' 色。' + (colors.length ? '生成将保留其余颜色并补齐到 25 色。' : '点击加号添加新的颜色。'), {
+      selected: new Set(), editor: colors.length ? { index: editor ? positions.get(editor.index) ?? Math.min(editor.index, colors.length - 1) : 0 } : null,
+      lastSelected: positions.get(lastSelected) ?? 0,
+    });
   }
 
   function applyOrderedColors(colors: string[], previous: string[], result?: GrowthResult) {
     const positions = positionMap(previous, colors), current = interaction.current;
-    setProject(value => ({ ...value, colors, ...(result ? { growth: result.growth, seed: result.seed } : {}) }));
-    setSelected(new Set([...current.selected].flatMap(index => positions.has(index) ? [positions.get(index)!] : [])));
-    setEditor(current.editor ? { index: positions.get(current.editor.index) ?? 0 } : colors.length ? { index: 0 } : null);
-    setLastSelected(positions.get(current.lastSelected) ?? 0);
+    commitProject({ ...projectRef.current, colors, ...(result ? { growth: result.growth, seed: result.seed } : {}) }, {
+      selected: new Set([...current.selected].flatMap(index => positions.has(index) ? [positions.get(index)!] : [])),
+      editor: current.editor ? { index: positions.get(current.editor.index) ?? 0 } : colors.length ? { index: 0 } : null,
+      lastSelected: positions.get(current.lastSelected) ?? 0,
+    });
   }
 
   function runOperation(operation: GrowthOperation) {
     if (busy || (operation.kind !== 'randomize' && isFull) || (operation.kind === 'randomize' && !operation.indices?.length)) return;
+    finishGesture(); importRequest.current++;
     const input = snapshotProject(project);
     const restart = operation.kind === 'randomize' && operation.indices!.length === input.colors.length;
     if (operation.kind === 'randomize') input.seed = `palette-${crypto.getRandomValues(new Uint32Array(1))[0].toString(36)}`;
-    if (restart) input.domainMode = 'auto';
     const action = operation.kind === 'add' ? '添加' : operation.kind === 'randomize' ? '重新抽取' : '补齐';
     setBusy(true); setNotice({ text: operation.kind === 'add' ? '正在生成下一步…' : operation.kind === 'randomize'
       ? operation.indices!.length === input.colors.length ? '正在从首色开始，依次重新抽取…' : '正在保留未选颜色，在当前范围内重新抽取…'
@@ -128,12 +179,12 @@ export function App() {
       if (result?.status === 'success') {
         if (operation.kind === 'complete') applyOrderedColors(sortPalette(result.colors), input.colors, result);
         else {
-          setProject(value => ({ ...value, colors: result.colors, growth: result.growth, seed: result.seed, ...(restart ? { domainMode: 'auto' as const } : {}) }));
-          if (operation.kind === 'add') setEditor({ index: result.colors.length - 1 });
+          commitProject({ ...projectRef.current, colors: result.colors, growth: result.growth, seed: result.seed,
+            ...(result.domainMode ? { domainMode: result.domainMode } : {}) }, operation.kind === 'add' ? { editor: { index: result.colors.length - 1 } } : {});
         }
         const detail = operation.kind === 'complete' ? '已补齐 25 色并自动排序，生成顺序独立保留。'
-          : operation.kind === 'add' ? '已生成一步。' : `已重新抽取 ${operation.indices!.length} 色，数量和槽位保持。${restart ? '范围随新色系重新建立。' : '未选颜色保持原值。'}`;
-        setNotice({ text: detail + (result.validation.valid ? '' : '首色仅按彩度抽取，当前约束冲突已在下方列出；继续生成前请调整颜色或规则。'), error: false });
+          : operation.kind === 'add' ? '已生成一步。' : `已重新抽取 ${operation.indices!.length} 色，数量和槽位保持。${restart ? input.domainMode === 'manual' ? '自定义范围保持。' : '范围随新色系重新建立。' : '未选颜色保持原值。'}`;
+        setNotice({ text: detail, error: false });
       } else {
         setNotice({ text: '未能' + action + '，现有颜色保持不变。' + (event.data.error ?? [...new Set(result?.diagnostics ?? [])].slice(0, 3).join(' ')), error: true });
       }
@@ -158,15 +209,32 @@ export function App() {
     setNotice({ text: '已按同色系近邻排序，颜色和选中对象保持不变。', error: false });
   }
 
-  function savePalette(name: string) {
+  async function savePalette(name: string, format: PaletteExportFormat, directory: SaveDirectoryHandle | null) {
+    const output = { ...snapshotProject(project), name };
+    const file = format === 'JSON' ? createJsonExport(buildProjectExport(output, name), name)
+      : format === 'SVG' ? createSvgExport(output.colors, output.constraints.textColor, name)
+      : await createPngExport(output.colors, output.constraints.textColor, name);
+    if (directory) {
+      const result = await saveBlobToDirectory(directory, file.filename, file.blob);
+      showToast(`${result.overwritten ? '已替换' : '已保存'} ${directory.name}/${result.filename}`);
+    } else downloadBlob(file.blob, file.filename);
+    commitProject({ ...projectRef.current, name }); setSaveOpen(false);
+  }
+
+  async function importPalette(file: File) {
+    const request = ++importRequest.current;
     try {
-      const output = { ...snapshotProject(project), name };
-      if (saveFormat === 'JSON') exportJson({ ...output, exportedAt: new Date().toISOString(), algorithm: 'oklch-adaptive-growth-v3', metrics: validation }, name + '.json');
-      else if (saveFormat === 'SVG') exportSvg(output.colors, output.constraints.textColor, name);
-      else if (saveFormat === 'PNG') exportPng(output.colors, output.constraints.textColor, name);
-      setProject(previous => ({ ...previous, name })); setSaveFormat(null);
+      if (file.size > PROJECT_JSON_MAX_BYTES) throw new Error('无法导入：JSON 文件不能超过 1 MB。');
+      cancel(); setNotice({ text: '', error: false });
+      const next = parseProjectJson(await file.text());
+      if (request !== importRequest.current) return;
+      const audit = validatePalette(next.colors, next.constraints, effectiveDomain(next));
+      cancel(); finishGesture();
+      commitProject(next, { editor: next.colors.length ? { index: 0 } : null, selected: new Set(), lastSelected: 0 });
+      setEditorRevision(value => value + 1);
+      setNotice({ text: `已导入 ${next.colors.length} 色，颜色与参数已重新检查。${audit.valid ? '' : '现有规则存在冲突，可继续查看和编辑。'}`, error: !audit.valid });
     } catch (error) {
-      showToast(error instanceof Error ? error.message : '保存失败，请重试。');
+      if (request === importRequest.current) showToast(error instanceof Error ? error.message : '导入失败，当前色板保持不变。');
     }
   }
 
@@ -174,11 +242,14 @@ export function App() {
     <header className="app-header"><a className="brand" href="./" aria-label="色序首页"><span className="brand-symbol"><Palette /></span><span><strong>色序<span className="brand-dot">.</span></strong><small>COLOR STUDIO</small></span></a>
       <nav className="header-links" aria-label="帮助文档"><a href="./docs/index.html" target="_blank" rel="noopener"><BookOpen />文档 <ArrowUpRight /></a></nav>
     </header>
-    <main className="workspace">
-      <section className="panel settings-panel" aria-label="全局预设与高级选项"><GlobalSettings project={project} onChange={updateProject} onPreview={preset => setPreview({ project: makeExample(preset), preset })} onEditStart={editStart} onNotice={showToast} /></section>
-      <section className="panel edit-panel" aria-label="颜色分析与调整"><div id="editor-content"><ColorEditor project={project} editor={editor} onColor={setColor} onNotice={showToast} onEditStart={editStart} /></div></section>
+    <main className="workspace" onPointerDownCapture={event => beginGesture(event.target)}
+      onFocusCapture={event => beginGesture(event.target)}
+      onBlur={finishGesture}>
+      <section className="panel settings-panel" aria-label="全局规则与高级选项"><GlobalSettings project={project} onChange={updateProject} onEditStart={editStart} onNotice={showToast} /></section>
+      <section className="panel edit-panel" aria-label="颜色分析与调整"><div id="editor-content"><ColorEditor key={editorRevision} project={project} editor={editor} onColor={setColor} onNotice={showToast} onEditStart={editStart} /></div></section>
       <section className="panel palette-panel" aria-label="色板"><div id="palette-content">
         <PaletteToolbar selectedCount={selected.size} colorCount={project.colors.length} isSorted={isSorted} busy={busy}
+          onImport={() => importInput.current?.click()} onSave={() => setSaveOpen(true)}
           onSelectAll={() => setSelected(new Set(project.colors.map((_, index) => index)))} onClearSelection={() => setSelected(new Set())}
           onDeleteSelected={deleteSelected} onSort={sort} onRandomize={() => runOperation({ kind: 'randomize', indices: [...selected] })}
           onGenerate={() => runOperation({ kind: 'complete' })} onCancel={() => { cancel(); setNotice({ text: '已取消，现有色板保留。', error: false }); }} />
@@ -192,13 +263,14 @@ export function App() {
         {hasColors && <>
           <p className="help selection-help">点击色块自由选取，再点取消；Shift 连选。点击色码仅切换编辑焦点。</p>
           <PaletteAnalysis project={project} domain={domain} validation={validation} activeIndex={editor?.index ?? null} selected={selected} onActivate={index => setEditor({ index })} />
-          <div className="export-bar"><span className="help">保存色板</span><div className="row">{(['JSON', 'SVG', 'PNG'] as const).map(format => <button key={format} onClick={() => setSaveFormat(format)} disabled={busy}>{format === 'JSON' && <Download aria-hidden="true" />}{format}</button>)}</div></div>
         </>}
+        <input ref={importInput} type="file" accept=".json,application/json" aria-label="导入色板 JSON" hidden
+          onChange={event => { const file = event.currentTarget.files?.[0]; event.currentTarget.value = ''; if (file) void importPalette(file); }} />
       </div></section>
     </main>
     <footer className="app-footer"><span>色序 · Course Color Studio</span><span>sRGB · OKLCh</span></footer>
     {toast && <div id="toast" role="status">{toast}</div>}
-    {preview && <PalettePreview project={preview.project} preset={preview.preset} canAddColor={!isFull} onClose={() => setPreview(null)} onUsePrimaries={usePreset} onAddColor={addColor} />}
-    {saveFormat && <SavePaletteDialog initialName={project.name} format={saveFormat} onClose={() => setSaveFormat(null)} onSave={savePalette} />}
+    {saveOpen && <SavePaletteDialog initialName={project.name} initialDirectory={saveDirectory.current}
+      onDirectoryChange={directory => { saveDirectory.current = directory; }} onClose={() => setSaveOpen(false)} onSave={savePalette} />}
   </>;
 }
