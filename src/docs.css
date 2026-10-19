@@ -67,6 +67,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .docs-article blockquote { margin: 23px 0; border-left: 3px solid #a4b493; padding: 4px 19px; background: #f1f4eb; color: #68775c; border-radius: 0 6px 6px 0; font-size: 13px; }
 .docs-article blockquote p { margin: 8px 0; }
 .docs-article img { max-width: 100%; height: auto; display: block; margin: 24px auto; border: 1px solid var(--line); border-radius: 6px; background: white; }
+.docs-article h1 img { display: inline-block; margin: 0; border: 0; background: transparent; vertical-align: middle; }
 .docs-article hr { border: 0; border-top: 1px solid var(--line); margin: 30px 0; }
 .docs-table-scroll { overflow-x: auto; margin: 24px 0; border: 1px solid var(--line); border-radius: 7px; }
 .docs-article table { border-collapse: collapse; width: 100%; font-size: 12px; line-height: 1.8; }

@@ -126,7 +126,12 @@ function transformArticle(article: HTMLElement, sourceUrl: URL): void {
     }
   });
   article.querySelectorAll<HTMLImageElement>('img[src]').forEach(img => {
-    img.src = new URL(img.getAttribute('src')!, sourceUrl).href;
+    const target = new URL(img.getAttribute('src')!, sourceUrl);
+    const publicBase = new URL('../public/', docsBase);
+    // Repository README images live in public/; Vite serves them at the site root.
+    img.src = target.href.startsWith(publicBase.href)
+      ? new URL(target.href.slice(publicBase.href.length), new URL('../', docsBase)).href
+      : target.href;
     img.loading = 'lazy';
     img.decoding = 'async';
   });
