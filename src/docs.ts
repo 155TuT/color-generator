@@ -2,24 +2,20 @@ import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import './docs.css';
 
-type DocumentKey = 'README.md' | 'ALGORITHM.md' | 'PALETTE_STUDY.md' | 'SOURCES.md' | 'VALIDATION.md';
+type DocumentKey = 'README.md' | 'ALGORITHM.md' | 'SOURCES.md';
 interface DocumentEntry { title: string; path: string }
 interface NavigationEntry { title: string; file: DocumentKey; section?: string; description: string }
 
 const documents: Record<DocumentKey, DocumentEntry> = {
   'README.md': { title: '使用指南', path: '../README.md' },
   'ALGORITHM.md': { title: '算法说明', path: 'ALGORITHM.md' },
-  'PALETTE_STUDY.md': { title: '配色分析', path: 'PALETTE_STUDY.md' },
   'SOURCES.md': { title: '研究来源', path: 'SOURCES.md' },
-  'VALIDATION.md': { title: '验证记录', path: 'VALIDATION.md' },
 };
 const navigation: NavigationEntry[] = [
-  { title: '快速开始', file: 'README.md', section: '启动与验证', description: '安装依赖、启动开发服务、构建与运行测试。' },
-  { title: '使用指南', file: 'README.md', section: '从主色到色板', description: '添加主色、设置规则、编辑色板和导出结果。' },
-  { title: '算法说明', file: 'ALGORITHM.md', description: '色彩空间、硬约束、候选采样和近邻补点。' },
-  { title: '配色分析', file: 'PALETTE_STUDY.md', description: '水雾森林与暮山陶土的原色、分布与邻接关系。' },
-  { title: '研究来源', file: 'SOURCES.md', description: '色彩数学、对比度标准、实现取舍与许可。' },
-  { title: '验证记录', file: 'VALIDATION.md', description: '构建、自动化检查、交互回归及验证边界。' },
+  { title: '快速开始', file: 'README.md', section: '启动与构建', description: '安装依赖、启动开发服务和构建静态站点。' },
+  { title: '使用指南', file: 'README.md', section: '从颜色到色板', description: '新增颜色、设置规则、编辑色板和导入导出。' },
+  { title: '算法说明', file: 'ALGORITHM.md', description: '色彩数学、顺序生长、分布分析和数据运行逻辑。' },
+  { title: '研究来源', file: 'SOURCES.md', description: '色彩数学、对比度定义、浏览器能力与依赖许可。' },
 ];
 const root = document.querySelector<HTMLDivElement>('#docs-app')!;
 const docsBase = new URL('./', window.location.href);
@@ -56,7 +52,7 @@ function shell(): void {
           <a class="docs-nav-link" href="${portalUrl.pathname}" data-doc-link data-nav-home>文档目录</a>
           ${navigation.map(entry => `<a class="docs-nav-link" href="${documentHref(entry.file, entry.section)}" data-doc-link data-nav-file="${entry.file}" ${entry.section ? `data-nav-section="${headingSlug(entry.section)}"` : ''}>${entry.title}</a>`).join('')}
         </nav>
-        <div class="docs-sidebar-note"><span class="docs-status-dot" aria-hidden="true"></span>随项目维护的说明与证据</div>
+        <div class="docs-sidebar-note"><span class="docs-status-dot" aria-hidden="true"></span>当前版本的使用与实现说明</div>
       </aside>
       <main id="docs-main" class="docs-main" tabindex="-1"></main>
       <aside id="docs-toc" class="docs-toc" aria-label="本页目录"></aside>
@@ -71,21 +67,21 @@ function renderHome(): void {
   main.innerHTML = `
     <div class="docs-page-eyebrow">Course Color Studio</div>
     <h1>文档目录</h1>
-    <p class="docs-lead">从使用流程到生成算法，查看项目的操作说明、设计依据与验证记录。</p>
+    <p class="docs-lead">查看工作台操作、配色计算、文件格式与实现依据。</p>
     <section class="docs-quickstart" aria-labelledby="quickstart-title">
       <div><h2 id="quickstart-title">启动项目</h2><p>在项目目录中执行。已有依赖时，直接运行 <code>npm run dev</code>。</p></div>
       <pre><code>npm install\nnpm run dev</code></pre>
-      <a href="${documentHref('README.md', '启动与验证')}" data-doc-link>环境要求与其他命令 <span aria-hidden="true">→</span></a>
+      <a href="${documentHref('README.md', '启动与构建')}" data-doc-link>环境要求与其他命令 <span aria-hidden="true">→</span></a>
     </section>
     <div class="docs-card-grid">${navigation.map(entry => `<a class="docs-card" href="${documentHref(entry.file, entry.section)}" data-doc-link><h2>${entry.title}<span aria-hidden="true">↗</span></h2><p>${entry.description}</p></a>`).join('')}</div>
-    <p class="docs-home-note">文章由项目中的 Markdown 文件渲染。配色统计、算法参数和验证结论以对应文章注明的输入及版本为准。</p>`;
+    <p class="docs-home-note">文档对应当前实现，正文由项目中的 Markdown 文件渲染。</p>`;
 }
 
 function updateNavigation(file: DocumentKey | null): void {
   const hash = safeDecode(window.location.hash.slice(1));
   document.querySelectorAll<HTMLAnchorElement>('#docs-navigation a').forEach(link => {
     const section = link.dataset.navSection;
-    const active = file === null ? 'navHome' in link.dataset : link.dataset.navFile === file && (!section || section === hash || (file === 'README.md' && section === headingSlug('从主色到色板') && hash !== headingSlug('启动与验证')));
+    const active = file === null ? 'navHome' in link.dataset : link.dataset.navFile === file && (!section || section === hash || (file === 'README.md' && section === headingSlug('从颜色到色板') && hash !== headingSlug('启动与构建')));
     if (active) link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
   });

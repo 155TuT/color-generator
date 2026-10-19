@@ -1,0 +1,382 @@
+{
+  "version": 1,
+  "name": "暮山陶土",
+  "colors": [
+    "#8F5E5F",
+    "#8D5270",
+    "#7A6068",
+    "#947374",
+    "#916582",
+    "#7F7689",
+    "#A98582",
+    "#AD6D71",
+    "#A0799B",
+    "#B99799",
+    "#D07A88",
+    "#7D89AB",
+    "#D39BA0",
+    "#DB8994",
+    "#B289A8",
+    "#D0A48E",
+    "#C6A5B6",
+    "#AA9CC6",
+    "#F39E9D",
+    "#DFA5B9",
+    "#D4B8CE",
+    "#E3A8A1",
+    "#D8B4BB",
+    "#E0B4CE",
+    "#E4B89D"
+  ],
+  "constraints": {
+    "minDeltaE": 1.4,
+    "maxBackgroundContrast": 3.5,
+    "textColor": "#FFFFFF",
+    "minTextContrast": 1.8,
+    "minChroma": 0.03,
+    "maxChroma": 0.11
+  },
+  "domain": {
+    "lightness": [
+      0.5012359534060706,
+      0.8317204664930007
+    ],
+    "chroma": [
+      0.01051811860051139,
+      0.12798303866922617
+    ],
+    "hue": [
+      264.6608489507456,
+      58.11891834470924
+    ]
+  },
+  "seed": "clay-01",
+  "domainMode": "manual",
+  "growth": {
+    "version": 1,
+    "nextOrder": 25,
+    "nodes": [
+      {
+        "id": "color-0",
+        "hex": "#8F5E5F",
+        "birthOrder": 0,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-1",
+        "hex": "#8D5270",
+        "birthOrder": 1,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-2",
+        "hex": "#7A6068",
+        "birthOrder": 2,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-3",
+        "hex": "#947374",
+        "birthOrder": 3,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-4",
+        "hex": "#916582",
+        "birthOrder": 4,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-5",
+        "hex": "#7F7689",
+        "birthOrder": 5,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-6",
+        "hex": "#A98582",
+        "birthOrder": 6,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-7",
+        "hex": "#AD6D71",
+        "birthOrder": 7,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-8",
+        "hex": "#A0799B",
+        "birthOrder": 8,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-9",
+        "hex": "#B99799",
+        "birthOrder": 9,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-10",
+        "hex": "#D07A88",
+        "birthOrder": 10,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-11",
+        "hex": "#7D89AB",
+        "birthOrder": 11,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-12",
+        "hex": "#D39BA0",
+        "birthOrder": 12,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-13",
+        "hex": "#DB8994",
+        "birthOrder": 13,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-14",
+        "hex": "#B289A8",
+        "birthOrder": 14,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-15",
+        "hex": "#D0A48E",
+        "birthOrder": 15,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-16",
+        "hex": "#C6A5B6",
+        "birthOrder": 16,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-17",
+        "hex": "#AA9CC6",
+        "birthOrder": 17,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-18",
+        "hex": "#F39E9D",
+        "birthOrder": 18,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-19",
+        "hex": "#DFA5B9",
+        "birthOrder": 19,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-20",
+        "hex": "#D4B8CE",
+        "birthOrder": 20,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-21",
+        "hex": "#E3A8A1",
+        "birthOrder": 21,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-22",
+        "hex": "#D8B4BB",
+        "birthOrder": 22,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-23",
+        "hex": "#E0B4CE",
+        "birthOrder": 23,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-24",
+        "hex": "#E4B89D",
+        "birthOrder": 24,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      }
+    ],
+    "styleDomain": {
+      "lightness": [
+        0.47623595340607067,
+        0.8567204664930007
+      ],
+      "chroma": [
+        0.0055181186005113896,
+        0.13298303866922617
+      ],
+      "hue": [
+        257.6608489507456,
+        65.11891834470924
+      ]
+    },
+    "directions": [
+      332.078095067394,
+      357.2615478935717,
+      17.06373019662186
+    ],
+    "referenceColors": [
+      "#8F5E5F",
+      "#8D5270",
+      "#7A6068",
+      "#947374",
+      "#916582",
+      "#7F7689",
+      "#A98582",
+      "#AD6D71",
+      "#A0799B",
+      "#B99799",
+      "#D07A88",
+      "#7D89AB",
+      "#D39BA0",
+      "#DB8994",
+      "#B289A8",
+      "#D0A48E",
+      "#C6A5B6",
+      "#AA9CC6",
+      "#F39E9D",
+      "#DFA5B9",
+      "#D4B8CE",
+      "#E3A8A1",
+      "#D8B4BB",
+      "#E0B4CE",
+      "#E4B89D"
+    ]
+  },
+  "exportedAt": "2026-10-19T19:06:23.699Z",
+  "algorithm": "oklch-adaptive-growth-v3",
+  "metrics": {
+    "valid": true,
+    "issues": [],
+    "recommendations": [
+      "#D07A88：色度 C=0.108 较高；希望更柔和时可降低色度。这是建议，不是硬性限制。",
+      "#DB8994：色度 C=0.101 较高；希望更柔和时可降低色度。这是建议，不是硬性限制。",
+      "#F39E9D：色度 C=0.102 较高；希望更柔和时可降低色度。这是建议，不是硬性限制。"
+    ],
+    "minDeltaE": 1.967746751336974,
+    "maxBackgroundContrast": 3.257892398208991,
+    "minTextContrast": 1.803836053497873,
+    "maxChroma": 0.10798303866922616,
+    "closestPair": [
+      20,
+      23
+    ],
+    "backgroundExtremes": [
+      1,
+      24
+    ],
+    "textContrasts": [
+      5.337733579968159,
+      5.8767037663060275,
+      5.674818779938393,
+      4.230745433589435,
+      4.786039230495407,
+      4.325431373404454,
+      3.2996268911511217,
+      4.036323925947751,
+      3.6822873021590983,
+      2.641681370963419,
+      3.0785886695590667,
+      3.4777921191231362,
+      2.3422004465610375,
+      2.619139157575008,
+      2.9843575997505485,
+      2.238146949099855,
+      2.2201814100658397,
+      2.536219720623817,
+      2.0611381704878298,
+      2.0547533091118466,
+      1.8186775222368068,
+      2.0227563542066904,
+      1.8807327978405162,
+      1.8120306017265613,
+      1.803836053497873
+    ]
+  }
+}

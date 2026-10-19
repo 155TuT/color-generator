@@ -1,0 +1,380 @@
+{
+  "version": 1,
+  "name": "水雾森林",
+  "colors": [
+    "#307D81",
+    "#38848D",
+    "#4E7790",
+    "#41888C",
+    "#3E8D9B",
+    "#5689A5",
+    "#519196",
+    "#4A96AD",
+    "#5A9DBD",
+    "#619AA0",
+    "#5CA5B3",
+    "#5CA8CD",
+    "#66A08F",
+    "#75AAB1",
+    "#5BB3DD",
+    "#7CAF94",
+    "#87B9C1",
+    "#79BDDE",
+    "#8CB7A5",
+    "#92BAC5",
+    "#9AC3D7",
+    "#91C5C6",
+    "#95CBC8",
+    "#9FC6E3",
+    "#A1C7A1"
+  ],
+  "constraints": {
+    "minDeltaE": 1.4,
+    "maxBackgroundContrast": 3,
+    "textColor": "#FFFFFF",
+    "minTextContrast": 1.8,
+    "minChroma": 0.03,
+    "maxChroma": 0.11
+  },
+  "domain": {
+    "lightness": [
+      0.5293264608539658,
+      0.8232240655732251
+    ],
+    "chroma": [
+      0.03848875937351033,
+      0.12410803595050056
+    ],
+    "hue": [
+      139.91134095458915,
+      245.61062475138488
+    ]
+  },
+  "seed": "waterforest-01",
+  "domainMode": "manual",
+  "growth": {
+    "version": 1,
+    "nextOrder": 25,
+    "nodes": [
+      {
+        "id": "color-0",
+        "hex": "#307D81",
+        "birthOrder": 0,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-1",
+        "hex": "#38848D",
+        "birthOrder": 1,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-2",
+        "hex": "#4E7790",
+        "birthOrder": 2,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-3",
+        "hex": "#41888C",
+        "birthOrder": 3,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-4",
+        "hex": "#3E8D9B",
+        "birthOrder": 4,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-5",
+        "hex": "#5689A5",
+        "birthOrder": 5,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-6",
+        "hex": "#519196",
+        "birthOrder": 6,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-7",
+        "hex": "#4A96AD",
+        "birthOrder": 7,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-8",
+        "hex": "#5A9DBD",
+        "birthOrder": 8,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-9",
+        "hex": "#619AA0",
+        "birthOrder": 9,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-10",
+        "hex": "#5CA5B3",
+        "birthOrder": 10,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-11",
+        "hex": "#5CA8CD",
+        "birthOrder": 11,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-12",
+        "hex": "#66A08F",
+        "birthOrder": 12,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-13",
+        "hex": "#75AAB1",
+        "birthOrder": 13,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-14",
+        "hex": "#5BB3DD",
+        "birthOrder": 14,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-15",
+        "hex": "#7CAF94",
+        "birthOrder": 15,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-16",
+        "hex": "#87B9C1",
+        "birthOrder": 16,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-17",
+        "hex": "#79BDDE",
+        "birthOrder": 17,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-18",
+        "hex": "#8CB7A5",
+        "birthOrder": 18,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-19",
+        "hex": "#92BAC5",
+        "birthOrder": 19,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-20",
+        "hex": "#9AC3D7",
+        "birthOrder": 20,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-21",
+        "hex": "#91C5C6",
+        "birthOrder": 21,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-22",
+        "hex": "#95CBC8",
+        "birthOrder": 22,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-23",
+        "hex": "#9FC6E3",
+        "birthOrder": 23,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      },
+      {
+        "id": "color-24",
+        "hex": "#A1C7A1",
+        "birthOrder": 24,
+        "parentId": null,
+        "strategy": "fixed",
+        "distance": null,
+        "branch": null
+      }
+    ],
+    "styleDomain": {
+      "lightness": [
+        0.5043264608539658,
+        0.8482240655732252
+      ],
+      "chroma": [
+        0.02055530071479241,
+        0.12910803595050055
+      ],
+      "hue": [
+        132.91134095458915,
+        252.61062475138488
+      ]
+    },
+    "directions": [
+      191.79547548019457,
+      207.34813112988638,
+      230.47772876763963
+    ],
+    "referenceColors": [
+      "#307D81",
+      "#38848D",
+      "#4E7790",
+      "#41888C",
+      "#3E8D9B",
+      "#5689A5",
+      "#519196",
+      "#4A96AD",
+      "#5A9DBD",
+      "#619AA0",
+      "#5CA5B3",
+      "#5CA8CD",
+      "#66A08F",
+      "#75AAB1",
+      "#5BB3DD",
+      "#7CAF94",
+      "#87B9C1",
+      "#79BDDE",
+      "#8CB7A5",
+      "#92BAC5",
+      "#9AC3D7",
+      "#91C5C6",
+      "#95CBC8",
+      "#9FC6E3",
+      "#A1C7A1"
+    ]
+  },
+  "exportedAt": "2026-10-19T19:06:23.691Z",
+  "algorithm": "oklch-adaptive-growth-v3",
+  "metrics": {
+    "valid": true,
+    "issues": [],
+    "recommendations": [
+      "#5BB3DD：色度 C=0.104 较高；希望更柔和时可降低色度。这是建议，不是硬性限制。"
+    ],
+    "minDeltaE": 1.4860789836983541,
+    "maxBackgroundContrast": 2.671243329420265,
+    "minTextContrast": 1.8008701884219833,
+    "maxChroma": 0.10410803595050055,
+    "closestPair": [
+      16,
+      19
+    ],
+    "backgroundExtremes": [
+      2,
+      23
+    ],
+    "textContrasts": [
+      4.798773995217459,
+      4.326976207354891,
+      4.810562477974039,
+      4.097467275252324,
+      3.8264687380037925,
+      3.806227964518641,
+      3.5956273050291996,
+      3.35616926252978,
+      3.0032843806193705,
+      3.1635410950923513,
+      2.804468336387305,
+      2.6456124428043157,
+      3.0043294769267392,
+      2.579492380516263,
+      2.349792130063971,
+      2.4950604581971696,
+      2.1560984025886536,
+      2.069615299530516,
+      2.2265087056610025,
+      2.089135617171955,
+      1.8815000877776415,
+      1.9080687407298225,
+      1.801908053216956,
+      1.8008701884219833,
+      1.8750963026489706
+    ]
+  }
+}
